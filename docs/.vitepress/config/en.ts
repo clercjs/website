@@ -11,12 +11,12 @@ export const enConfig = defineConfig({
         link: "/getting-start",
       },
       {
-        text: "Sponsor (CN)",
-        link: "https://afdian.net/a/so1ve",
-      },
-      {
         text: "Members",
         link: "/members",
+      },
+      {
+        text: "Sponsor (CN)",
+        link: "https://afdian.net/a/so1ve",
       },
     ],
     sidebar: [

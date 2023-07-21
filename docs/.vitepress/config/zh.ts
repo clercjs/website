@@ -11,12 +11,12 @@ export const zhConfig = defineConfig({
         link: "/zh/getting-started",
       },
       {
-        text: "捐赠作者",
-        link: "https://afdian.net/a/so1ve",
-      },
-      {
         text: "成员",
         link: "/zh/members",
+      },
+      {
+        text: "捐赠作者",
+        link: "https://afdian.net/a/so1ve",
       },
     ],
     sidebar: [
