@@ -8,7 +8,7 @@ export const enConfig = defineConfig({
     nav: [
       {
         text: "Guide",
-        link: "/getting-start",
+        link: "/getting-started",
       },
       {
         text: "Members",
