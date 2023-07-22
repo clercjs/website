@@ -7,7 +7,7 @@ hero:
   tagline: CLI library for Node.js, Deno and Bun
   actions:
     - theme: brand
-      text: Getting Start
+      text: Getting Started
       link: /getting-started
     - theme: alt
       text: API References (unavailable now)
