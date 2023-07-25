@@ -5,6 +5,9 @@ hero:
   name: "Clerc"
   text: "全功能 CLI 库"
   tagline: 适用于 Node.js，Deno 和 Bun
+  image: 
+    src: /Banner.webp
+    alt: Clerc logo
   actions:
     - theme: brand
       text: 快速开始

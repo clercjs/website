@@ -7,6 +7,10 @@ export const sharedConfig = defineConfig({
   lastUpdated: true,
   head: [["link", { rel: "icon", href: "/logo.webp", type: "image/webp" }]],
   themeConfig: {
+    logo: {
+      light: "/black.webp",
+      dark: "/white.webp"
+    },
     outline: [2, 3],
     socialLinks: [
       {
