@@ -6,8 +6,8 @@ settings:
 
 devDependencies:
   '@so1ve/eslint-config':
-    specifier: ^0.114.3
-    version: 0.114.3(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
+    specifier: ^0.116.0
+    version: 0.116.0(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
   '@so1ve/prettier-config':
     specifier: ^0.114.3
     version: 0.114.3(prettier@3.0.0)
@@ -669,8 +669,8 @@ packages:
       picomatch: 2.3.1
     dev: true
 
-  /@so1ve/eslint-config-basic@0.114.3(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-v6KoQfEbpxqQi6w9nSnsHtAhZ22m51GhhcU7g2qFsJzs5p+FuTSECUcmr4A59zKhpsT5hSuopoJz13l+Fy+QDw==}
+  /@so1ve/eslint-config-basic@0.116.0(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-xBqUEdCNhyW4a3ZBUrRWMj/Ap3x09g0wVG/wxNR6gLARbq0u9ppKoSKpVhtZZGszSaMlEnTh/SPXq0y0TeB3pQ==}
     peerDependencies:
       eslint: '>=8.40.0'
       prettier: ^3.0.0
@@ -678,9 +678,9 @@ packages:
       '@eslint-community/eslint-plugin-eslint-comments': 3.2.1(eslint@8.45.0)
       '@html-eslint/eslint-plugin': 0.19.0
       '@html-eslint/parser': 0.19.0
-      '@so1ve/eslint-plugin': 0.114.3(eslint@8.45.0)(typescript@5.1.6)
-      '@so1ve/eslint-plugin-sort-imports': 0.114.3(eslint@8.45.0)
-      '@so1ve/prettier-config': 0.114.3(prettier@3.0.0)
+      '@so1ve/eslint-plugin': 0.116.0(eslint@8.45.0)(typescript@5.1.6)
+      '@so1ve/eslint-plugin-sort-imports': 0.116.0(eslint@8.45.0)
+      '@so1ve/prettier-config': 0.116.0(prettier@3.0.0)
       '@unocss/eslint-config': 0.53.5(eslint@8.45.0)(typescript@5.1.6)
       eslint: 8.45.0
       eslint-define-config: 1.21.0
@@ -713,15 +713,15 @@ packages:
       - typescript
     dev: true
 
-  /@so1ve/eslint-config-ts@0.114.3(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-piSgCycvzMeEQrujiFO/yHJTGE2r64guqoGE3AAaKa6Zv3eHa8zYfiP6kJE1KpZCVHtMHJoUW9K/avA5VdEItQ==}
+  /@so1ve/eslint-config-ts@0.116.0(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-eH7RwSaheL2ZQCLvsvGAXnwRckdGVKEDDvDGUU0eIF8o8QDFYbDTNM1VHX1rxeyX7gK7uyEfE1Ij93GzvkhZUw==}
     peerDependencies:
       eslint: '>=8.40.0'
       prettier: ^3.0.0
       typescript: '>=3.9'
     dependencies:
-      '@so1ve/eslint-config-basic': 0.114.3(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
-      '@so1ve/eslint-plugin': 0.114.3(eslint@8.45.0)(typescript@5.1.6)
+      '@so1ve/eslint-config-basic': 0.116.0(@typescript-eslint/eslint-plugin@6.1.0)(@typescript-eslint/parser@6.1.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@so1ve/eslint-plugin': 0.116.0(eslint@8.45.0)(typescript@5.1.6)
       '@typescript-eslint/eslint-plugin': 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.45.0)(typescript@5.1.6)
       '@typescript-eslint/parser': 6.1.0(eslint@8.45.0)(typescript@5.1.6)
       eslint: 8.45.0
@@ -740,13 +740,13 @@ packages:
       - supports-color
     dev: true
 
-  /@so1ve/eslint-config-vue@0.114.3(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-4jw5oVyPwpSadL55RLVElSDFcj3Ore5sKV4WyK3fG3xQITOoKyrTtS4QduxaeX75XaMlb9CSHdv/kpnJ6zBjcw==}
+  /@so1ve/eslint-config-vue@0.116.0(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-bMvuGy00es2OzJbRL8SqFjTwMqwEs3L2zv1/GJoVpib/rrXPwv2RkOwQlur2juT9zr8jBpoKktJQjVmT678TdA==}
     peerDependencies:
       eslint: '>=8.40.0'
       prettier: ^3.0.0
     dependencies:
-      '@so1ve/eslint-config-ts': 0.114.3(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@so1ve/eslint-config-ts': 0.116.0(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
       eslint: 8.45.0
       eslint-define-config: 1.21.0
       eslint-plugin-vue: 9.15.1(eslint@8.45.0)
@@ -760,14 +760,14 @@ packages:
       - typescript
     dev: true
 
-  /@so1ve/eslint-config@0.114.3(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-+a7dtjpVN1CL6EiFDj+SSp4VZnVjQZkUlvXdgU7vxgyGMfwVN/MK3aeQF0qIOMS27w/30Ef1UGQTPiUHY+1okA==}
+  /@so1ve/eslint-config@0.116.0(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-l3XFxaQ3+5ywvxBU2QRJ+XMZdnu4niY48OYCwKFmFdFRlQOg2TbQEycMrQ/dfKmi31kk5KGleFjsi5839jdDaA==}
     peerDependencies:
       eslint: '>=8.40.0'
       prettier: ^3.0.0
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 3.2.1(eslint@8.45.0)
-      '@so1ve/eslint-config-vue': 0.114.3(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
+      '@so1ve/eslint-config-vue': 0.116.0(eslint-plugin-i@2.27.5-4)(eslint@8.45.0)(prettier@3.0.0)(typescript@5.1.6)
       '@typescript-eslint/eslint-plugin': 6.1.0(@typescript-eslint/parser@6.1.0)(eslint@8.45.0)(typescript@5.1.6)
       '@typescript-eslint/parser': 6.1.0(eslint@8.45.0)(typescript@5.1.6)
       eslint: 8.45.0
@@ -792,8 +792,8 @@ packages:
       - typescript
     dev: true
 
-  /@so1ve/eslint-plugin-sort-imports@0.114.3(eslint@8.45.0):
-    resolution: {integrity: sha512-+Z5flsAm1AtkyvH1IV4SlKkjRujBXxsEaSQDhbkHpPJGC+/sAhkUaAiK69BkuEdgV8NRcYhZEy7r5213HjDYEw==}
+  /@so1ve/eslint-plugin-sort-imports@0.116.0(eslint@8.45.0):
+    resolution: {integrity: sha512-vuJJIm6DX0CGIuS1kRlQAnAt9dqRU9oF3FaADX7B7XaijFFvfDsiuIdclSLBoSwpvImk2wvmqdoc/3e3NGthjA==}
     peerDependencies:
       eslint: '>=8.40.0'
     dependencies:
@@ -801,8 +801,8 @@ packages:
       natsort: 2.0.3
     dev: true
 
-  /@so1ve/eslint-plugin@0.114.3(eslint@8.45.0)(typescript@5.1.6):
-    resolution: {integrity: sha512-HHWT46GpUxpu5VFAlPwvj1gZUUop2Iob9kAcVqdy2+Ht7M31voH+di9KIgtfiMGJaQ7cSdxgesJ13napqil2lw==}
+  /@so1ve/eslint-plugin@0.116.0(eslint@8.45.0)(typescript@5.1.6):
+    resolution: {integrity: sha512-MH+PHjE3cTqLZ7z5zgqz8R2H6qdJJZ0kucJZ+xzkAPvwqp1ptMGbNSur3x+jM04x7xRbVAWQ3kOUltpvyOx6ng==}
     dependencies:
       '@typescript-eslint/types': 6.1.0
       '@typescript-eslint/utils': 6.1.0(eslint@8.45.0)(typescript@5.1.6)
@@ -820,6 +820,18 @@ packages:
       prettier: 3.0.0
       prettier-plugin-astro: 0.11.0
       prettier-plugin-curly-and-jsdoc: 0.114.3(prettier@3.0.0)
+      prettier-plugin-pkgsort: 0.2.0(prettier@3.0.0)
+      prettier-plugin-toml: 0.3.1
+    dev: true
+
+  /@so1ve/prettier-config@0.116.0(prettier@3.0.0):
+    resolution: {integrity: sha512-2ybia7v2s3CEdAe/phFoCZ6C1jPIg7zNiqZqWAhYGxLKeCCsDyR2TFDrZd+cGFyhM/zMw8cKBIAIVBDF4E0mNQ==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.0.0
+      prettier-plugin-astro: 0.11.0
+      prettier-plugin-curly-and-jsdoc: 0.116.0(prettier@3.0.0)
       prettier-plugin-pkgsort: 0.2.0(prettier@3.0.0)
       prettier-plugin-toml: 0.3.1
     dev: true
@@ -3503,6 +3515,14 @@ packages:
 
   /prettier-plugin-curly-and-jsdoc@0.114.3(prettier@3.0.0):
     resolution: {integrity: sha512-tRlSBUY8W5etR52K186z6rHkGCyL1lLqDPVeurA88LbYZxi9Okpn89yP6o83QoV2pwRunSkMykxOa/lv8Nhb4g==}
+    peerDependencies:
+      prettier: ^3.0.0
+    dependencies:
+      prettier: 3.0.0
+    dev: true
+
+  /prettier-plugin-curly-and-jsdoc@0.116.0(prettier@3.0.0):
+    resolution: {integrity: sha512-qBFoTZLJOxxepKxZdM6tqGJsCMqze/oA2ODphhuhmhR5echPSIdcmYxCq7zca7rsrCcUzSpGj0/oszuDuvTQTQ==}
     peerDependencies:
       prettier: ^3.0.0
     dependencies:
