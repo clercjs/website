@@ -4,5 +4,5 @@ import "./style.css";
 import "virtual:uno.css";
 
 export default {
-  extends: Theme,
+	extends: Theme,
 };

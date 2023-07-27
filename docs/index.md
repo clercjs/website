@@ -5,7 +5,7 @@ hero:
   name: "Clerc"
   text: "Full-featured CLI library"
   tagline: CLI library for Node.js, Deno and Bun
-  image: 
+  image:
     src: /Banner.webp
     alt: Clerc logo
   actions:

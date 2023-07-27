@@ -18,16 +18,16 @@ title: plugins
 import { Clerc, definePlugin } from "clerc";
 
 const plugin = definePlugin({
-  setup: (cli) =>
-    cli.command("foo", "一个 foo 命令").on("foo", (ctx) => {
-      console.log("It works!");
-    }),
+	setup: (cli) =>
+		cli.command("foo", "一个 foo 命令").on("foo", (context) => {
+			console.log("It works!");
+		}),
 });
 
 const cli = Clerc.create()
-  .scriptName("foo-cli")
-  .description("一个简单的命令行界面")
-  .version("1.0.0")
-  .use(plugin)
-  .parse();
+	.scriptName("foo-cli")
+	.description("一个简单的命令行界面")
+	.version("1.0.0")
+	.use(plugin)
+	.parse();
 ```

@@ -18,16 +18,16 @@ the return value is not required technically, but it is recommended to return th
 import { Clerc, definePlugin } from "clerc";
 
 const plugin = definePlugin({
-  setup: (cli) =>
-    cli.command("foo", "A foo command").on("foo", (ctx) => {
-      console.log("It works!");
-    }),
+	setup: (cli) =>
+		cli.command("foo", "A foo command").on("foo", (context) => {
+			console.log("It works!");
+		}),
 });
 
 const cli = Clerc.create()
-  .scriptName("foo-cli")
-  .description("A simple cli")
-  .version("1.0.0")
-  .use(plugin)
-  .parse();
+	.scriptName("foo-cli")
+	.description("A simple cli")
+	.version("1.0.0")
+	.use(plugin)
+	.parse();
 ```

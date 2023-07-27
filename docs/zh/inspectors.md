@@ -14,17 +14,17 @@ title: 检查器
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
-  .scriptName("foo-cli")
-  .description("一个简单的命令行界面")
-  .version("1.0.0")
-  .command("foo", "一个 foo 命令")
-  .inspector((ctx, next) => {
-    console.log("在 foo 之前");
-    // 您可以向上下文中添加一些内容，或修改上下文
-    ctx.foo = "bar";
-    next(); // 调用 next 继续执行
-  })
-  .parse();
+	.scriptName("foo-cli")
+	.description("一个简单的命令行界面")
+	.version("1.0.0")
+	.command("foo", "一个 foo 命令")
+	.inspector((context, next) => {
+		console.log("在 foo 之前");
+		// 您可以向上下文中添加一些内容，或修改上下文
+		context.foo = "bar";
+		next(); // 调用 next 继续执行
+	})
+	.parse();
 ```
 
 ## 顺序
@@ -35,20 +35,20 @@ const cli = Clerc.create()
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
-  .scriptName("foo-cli")
-  .description("一个简单的命令行界面")
-  .version("1.0.0")
-  .command("foo", "一个 foo 命令")
-  .inspector({
-    enforce: "normal", // 默认值，或者 'pre', 'post'
-    fn: (ctx, next) => {
-      console.log("在 foo 之前");
-      // 您可以向上下文中添加一些内容，或修改上下文
-      ctx.foo = "bar";
-      next(); // 调用 next 继续执行
-    },
-  })
-  .parse();
+	.scriptName("foo-cli")
+	.description("一个简单的命令行界面")
+	.version("1.0.0")
+	.command("foo", "一个 foo 命令")
+	.inspector({
+		enforce: "normal", // 默认值，或者 'pre', 'post'
+		fn: (context, next) => {
+			console.log("在 foo 之前");
+			// 您可以向上下文中添加一些内容，或修改上下文
+			context.foo = "bar";
+			next(); // 调用 next 继续执行
+		},
+	})
+	.parse();
 ```
 
 因此，执行顺序如下：
@@ -65,21 +65,21 @@ const cli = Clerc.create()
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
-  .scriptName("foo-cli")
-  .description("一个简单的命令行界面")
-  .version("1.0.0")
-  .command("foo", "一个 foo 命令")
-  .inspector((ctx, next) => {
-    console.log("在 foo 之前");
-    // 您可以向上下文中添加一些内容，或修改上下文
-    ctx.foo = "bar";
-    next(); // 调用 next 继续执行
-    console.log("在 foo 之后");
-  })
-  .on("foo", (ctx) => {
-    console.log("它运行了！");
-  })
-  .parse();
+	.scriptName("foo-cli")
+	.description("一个简单的命令行界面")
+	.version("1.0.0")
+	.command("foo", "一个 foo 命令")
+	.inspector((context, next) => {
+		console.log("在 foo 之前");
+		// 您可以向上下文中添加一些内容，或修改上下文
+		context.foo = "bar";
+		next(); // 调用 next 继续执行
+		console.log("在 foo 之后");
+	})
+	.on("foo", (context) => {
+		console.log("它运行了！");
+	})
+	.parse();
 
 // 输出结果为：
 // 在 foo 之前
