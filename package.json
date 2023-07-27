@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@so1ve/eslint-config": "^0.116.0",
-    "@so1ve/prettier-config": "^0.114.3",
+    "@so1ve/prettier-config": "^0.116.0",
     "eslint": "^8.45.0",
     "prettier": "^3.0.0",
     "unocss": "^0.53.5",
