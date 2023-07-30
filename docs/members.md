@@ -6,7 +6,7 @@ hero:
   tagline: Clerc Open Source Team
 ---
 
-<script setup>
+<script setup lang="ts">
 import { VPTeamMembers } from "vitepress/theme";
 
 const members = [
