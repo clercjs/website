@@ -92,9 +92,9 @@ const cli = Clerc.create()
 		],
 	})
 	.on("foo", (context) => {
-		context.parameters.requiredParameter; // => "a" (字符串)
-		context.parameters.optionalParameter; // => "b" (字符串 | undefined)
-		context.parameters.optionalSpread; // => ["c", "d"] (字符串数组)
+		context.parameters.requiredParameter; // => "a" (string)
+		context.parameters.optionalParameter; // => "b" (string | undefined)
+		context.parameters.optionalSpread; // => ["c", "d"] (string[])
 	})
 	.parse();
 ```
@@ -127,8 +127,8 @@ const cli = Clerc.create()
 		parameters: ["<script>", "--", "[arguments...]"],
 	})
 	.on("echo", (context) => {
-		context.parameters.script; // => "echo" (字符串)
-		context.parameters.arguments; // => ["hello", "world"] (字符串数组)
+		context.parameters.script; // => "echo" (string)
+		context.parameters.arguments; // => ["hello", "world"] (string[])
 	})
 	.parse();
 ```
@@ -186,9 +186,9 @@ const cli = Clerc.create()
 		},
 	})
 	.on("echo", (context) => {
-		context.flags.someBoolean; // => true (布尔值 | undefined)
-		context.flags.someString; // => "hello" (字符串)
-		context.flags.someNumber; // => [1, 2] (数字数组)
+		context.flags.someBoolean; // => true (boolean | undefined)
+		context.flags.someString; // => "hello" (string)
+		context.flags.someNumber; // => [1, 2] (number[])
 	})
 	.parse();
 ```
