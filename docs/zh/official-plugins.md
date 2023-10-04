@@ -1,5 +1,5 @@
 ---
-title: Official Plugins
+title: 官方插件
 ---
 
 # 官方插件
