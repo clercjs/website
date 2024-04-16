@@ -32,7 +32,7 @@ export const zhConfig = defineConfig({
 						link: "/zh/commands",
 					},
 					{
-						text: "检查器",
+						text: "拦截器",
 						link: "/zh/interceptors",
 					},
 					{

@@ -1,14 +1,14 @@
 ---
-title: 检查器
+title: 拦截器
 ---
 
-# 检查器
+# 拦截器
 
-检查器是在调用命令处理程序之前或之后运行的函数，类似于 koa 中的中间件。
+拦截器是在调用命令处理程序之前或之后运行的函数，类似于 koa 中的中间件。
 
 ## 用法
 
-可以使用 `interceptor` 方法将检查器添加到命令行界面 (CLI) 中：
+可以使用 `interceptor` 方法将拦截器添加到命令行界面 (CLI) 中：
 
 ```ts
 import { Clerc } from "clerc";
@@ -53,9 +53,9 @@ const cli = Clerc.create()
 
 因此，执行顺序如下：
 
-1. 预检查器（Pre interceptors）
-2. 正常检查器（Normal interceptors）
-3. 后检查器（Post interceptors）
+1. 预拦截器（Pre interceptors）
+2. 正常拦截器（Normal interceptors）
+3. 后拦截器（Post interceptors）
 
 ## 在命令处理程序之后调用
 
