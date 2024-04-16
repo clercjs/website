@@ -33,7 +33,7 @@ export const zhConfig = defineConfig({
 					},
 					{
 						text: "检查器",
-						link: "/zh/inspectors",
+						link: "/zh/interceptors",
 					},
 					{
 						text: "插件",

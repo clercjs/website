@@ -1,14 +1,14 @@
 ---
-title: Inspectors
+title: Interceptors
 ---
 
-# Inspectors
+# Interceptors
 
-An inspector is a function that runs before or after calling the command handler, like middleware in koa.
+An interceptor is a function that runs before or after calling the command handler, like middleware in koa.
 
 ## Usage
 
-Inspectors are added to the cli using the `inspector` method:
+Interceptors are added to the cli using the `interceptor` method:
 
 ```ts
 import { Clerc } from "clerc";
@@ -18,7 +18,7 @@ const cli = Clerc.create()
 	.description("A simple cli")
 	.version("1.0.0")
 	.command("foo", "A foo command")
-	.inspector((context, next) => {
+	.interceptor((context, next) => {
 		console.log("Before foo");
 		// You can inject something into the context, or modify the context
 		context.foo = "bar";
@@ -29,7 +29,7 @@ const cli = Clerc.create()
 
 ## Order
 
-The inspector method accepts either a function or an object:
+The interceptor method accepts either a function or an object:
 
 ```ts
 import { Clerc } from "clerc";
@@ -39,7 +39,7 @@ const cli = Clerc.create()
 	.description("A simple cli")
 	.version("1.0.0")
 	.command("foo", "A foo command")
-	.inspector({
+	.interceptor({
 		enforce: "normal", // default, or 'pre', 'post'
 		fn: (context, next) => {
 			console.log("Before foo");
@@ -53,9 +53,9 @@ const cli = Clerc.create()
 
 So the order of execution is:
 
-1. Pre inspectors
-2. Normal inspectors
-3. Post inspectors
+1. Pre interceptors
+2. Normal interceptors
+3. Post interceptors
 
 ## Call after command handler
 
@@ -69,7 +69,7 @@ const cli = Clerc.create()
 	.description("A simple cli")
 	.version("1.0.0")
 	.command("foo", "A foo command")
-	.inspector((context, next) => {
+	.interceptor((context, next) => {
 		console.log("Before foo");
 		// You can inject something into the context, or modify the context
 		context.foo = "bar";

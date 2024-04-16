@@ -8,7 +8,7 @@ title: 检查器
 
 ## 用法
 
-可以使用 `inspector` 方法将检查器添加到命令行界面 (CLI) 中：
+可以使用 `interceptor` 方法将检查器添加到命令行界面 (CLI) 中：
 
 ```ts
 import { Clerc } from "clerc";
@@ -18,7 +18,7 @@ const cli = Clerc.create()
 	.description("一个简单的命令行界面")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令")
-	.inspector((context, next) => {
+	.interceptor((context, next) => {
 		console.log("在 foo 之前");
 		// 您可以向上下文中添加一些内容，或修改上下文
 		context.foo = "bar";
@@ -29,7 +29,7 @@ const cli = Clerc.create()
 
 ## 顺序
 
-`inspector` 方法接受一个函数或一个对象：
+`interceptor` 方法接受一个函数或一个对象：
 
 ```ts
 import { Clerc } from "clerc";
@@ -39,7 +39,7 @@ const cli = Clerc.create()
 	.description("一个简单的命令行界面")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令")
-	.inspector({
+	.interceptor({
 		enforce: "normal", // 默认值，或者 'pre', 'post'
 		fn: (context, next) => {
 			console.log("在 foo 之前");
@@ -53,9 +53,9 @@ const cli = Clerc.create()
 
 因此，执行顺序如下：
 
-1. 预检查器（Pre inspectors）
-2. 正常检查器（Normal inspectors）
-3. 后检查器（Post inspectors）
+1. 预检查器（Pre interceptors）
+2. 正常检查器（Normal interceptors）
+3. 后检查器（Post interceptors）
 
 ## 在命令处理程序之后调用
 
@@ -69,7 +69,7 @@ const cli = Clerc.create()
 	.description("一个简单的命令行界面")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令")
-	.inspector((context, next) => {
+	.interceptor((context, next) => {
 		console.log("在 foo 之前");
 		// 您可以向上下文中添加一些内容，或修改上下文
 		context.foo = "bar";

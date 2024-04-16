@@ -32,8 +32,8 @@ export const enConfig = defineConfig({
 						link: "/commands",
 					},
 					{
-						text: "Inspectors",
-						link: "/inspectors",
+						text: "Interceptors",
+						link: "/interceptors",
 					},
 					{
 						text: "Plugins",
