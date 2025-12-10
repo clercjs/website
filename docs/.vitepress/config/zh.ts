@@ -1,4 +1,13 @@
+import { join } from "node:path";
+
 import { defineConfig } from "vitepress";
+
+import { getPluginNavigation } from "./plugin-navigation";
+
+const pluginNavigation = await getPluginNavigation(
+	join(import.meta.dirname, "..", "..", "zh", "official-plugins"),
+	"/zh/official-plugins",
+);
 
 export const zhConfig = defineConfig({
 	lang: "zh-CN",
@@ -11,12 +20,12 @@ export const zhConfig = defineConfig({
 				link: "/zh/getting-started",
 			},
 			{
-				text: "成员",
-				link: "/zh/members",
+				text: "官方插件列表",
+				items: pluginNavigation,
 			},
 			{
-				text: "捐赠作者",
-				link: "https://afdian.net/a/so1ve",
+				text: "成员",
+				link: "/zh/members",
 			},
 		],
 		sidebar: [
@@ -36,14 +45,18 @@ export const zhConfig = defineConfig({
 						link: "/zh/interceptors",
 					},
 					{
+						text: "上下文",
+						link: "/zh/context",
+					},
+					{
 						text: "插件",
 						link: "/zh/plugins",
 					},
 				],
 			},
 			{
-				text: "Official Plugins",
-				link: "/zh/official-plugins",
+				text: "官方插件列表",
+				items: pluginNavigation,
 			},
 		],
 		editLink: {

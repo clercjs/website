@@ -1,14 +1,14 @@
 ---
-title: plugins
+title: 插件
 ---
 
 # 插件
 
-插件是一个接受 `Clerc` 实例并返回 `Clerc` 实例的函数。
+插件是一个可以接受 `Clerc` 实例并对其拓展的函数。
 
 :::info
 
-从技术上讲，返回值并不是必需的，但建议返回 `Clerc` 实例以获得更好的类型推断。
+插件系统允许您根据需求添加丰富的功能。
 
 :::
 
@@ -19,15 +19,39 @@ import { Clerc, definePlugin } from "clerc";
 
 const plugin = definePlugin({
 	setup: (cli) =>
-		cli.command("foo", "一个 foo 命令").on("foo", (context) => {
+		cli.command("foo", "一个 foo 命令").on("foo", (ctx) => {
 			console.log("It works!");
 		}),
 });
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.use(plugin)
 	.parse();
 ```
+
+## 开发方法
+
+在 `setup` 函数中，你可以直接拿到 `Clerc` 实例，并对其进行各种配置和扩展，例如添加命令、事件监听器等。
+
+```ts
+import { definePlugin } from "clerc";
+
+export const myPlugin = definePlugin({
+	setup: (cli) => {
+		// 在这里对 cli 进行扩展
+		return cli.command("bar", "一个 bar 命令").on("bar", (ctx) => {
+			console.log("Bar command executed!");
+		});
+	},
+});
+```
+
+## 发布插件
+
+虽然不是必须的，但是建议你在发布插件时，使用如下的规范，以便用户更容易地识别和使用你的插件：
+
+- 使用 `clerc-plugin-<name>` 作为包名。
+- 在 `package.json` 中添加关键词 `clerc-plugin`。

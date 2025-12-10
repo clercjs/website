@@ -4,19 +4,27 @@ title: 命令
 
 # 命令
 
-:::info
+命令是 CLI 的核心组成部分。每个命令都有一个名称、描述、选项和参数。您可以使用命令来执行特定的任务或操作。
 
-本页面的大部分内容来自 [Cleye](https://github.com/privatenumber/cleye)。感谢！
+## 基础用法
 
-:::
+```ts
+import { Clerc } from "clerc";
 
-## 选项
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("一个简单的 CLI")
+	.version("1.0.0")
+	.command("foo", "一个 foo 命令")
+	.on("foo", (ctx) => {
+		console.log("It works!");
+	})
+	.parse();
+```
 
-我们在[快速开始](./getting-started)中创建了一个名为 "foo" 的命令，它的描述是 "foo command"。我们使用 `on()` 来注册一个**命令处理程序**。现在我们将学习如何为命令添加**选项**。
+这将创建一个名为 `foo-cli` 的 CLI 应用程序，其中包含一个名为 `foo` 的命令。当用户运行 `foo-cli foo` 时，CLI 将输出 "It works!"。
 
-选项作为第三个参数传递给 `command(name, description, options?)`。
-
-### 别名
+## 别名
 
 你可以为你的命令添加一个别名：
 
@@ -25,12 +33,12 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令", {
 		alias: "bar",
 	})
-	.on("foo", (context) => {
+	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
@@ -45,20 +53,56 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令", {
 		alias: ["bar", "baz"],
 	})
-	.on("foo", (context) => {
+	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
 ```
 
-### 参数
+## 子命令
 
-#### 通用
+你可以通过在命令名称中使用空格来定义子命令：
+
+```js
+import { Clerc } from "clerc";
+
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("一个简单的 CLI")
+	.version("1.0.0")
+	.command("parent child", "一个子命令")
+	.on("parent child", (ctx) => {
+		console.log("子命令被调用了！");
+	})
+	.parse();
+```
+
+## 根命令
+
+你可以定义一个根命令（没有名称的命令）来处理没有指定子命令时的情况：
+
+```js
+import { Clerc } from "clerc";
+
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("一个简单的 CLI")
+	.version("1.0.0")
+	.command("", "根命令")
+	.on("", (ctx) => {
+		console.log("根命令被调用了！");
+	})
+	.parse();
+```
+
+## 参数
+
+### 通用
 
 参数（也称为 _位置参数_）是与参数值相对应的名称。将参数视为变量名，将参数值视为与变量关联的值。
 
@@ -82,7 +126,7 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令", {
 		parameters: [
@@ -91,15 +135,15 @@ const cli = Clerc.create()
 			"[optional spread...]",
 		],
 	})
-	.on("foo", (context) => {
-		context.parameters.requiredParameter; // => "a" (string)
-		context.parameters.optionalParameter; // => "b" (string | undefined)
-		context.parameters.optionalSpread; // => ["c", "d"] (string[])
+	.on("foo", (ctx) => {
+		ctx.parameters.requiredParameter; // => "a" (string)
+		ctx.parameters.optionalParameter; // => "b" (string | undefined)
+		ctx.parameters.optionalSpread; // => ["c", "d"] (string[])
 	})
 	.parse();
 ```
 
-#### 结束标志
+### 结束标志
 
 结束标志（`--`）（也称为 _选项结束符_）允许用户传递一部分参数。这对于将应该与其他参数分开解析的参数或看起来像选项的参数非常有用。
 
@@ -121,37 +165,34 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("echo", "回显", {
 		parameters: ["<script>", "--", "[arguments...]"],
 	})
-	.on("echo", (context) => {
-		context.parameters.script; // => "echo" (string)
-		context.parameters.arguments; // => ["hello", "world"] (string[])
+	.on("echo", (ctx) => {
+		ctx.parameters.script; // => "echo" (string)
+		ctx.parameters.arguments; // => ["hello", "world"] (string[])
 	})
 	.parse();
 ```
 
-### 标志
+## 选项
 
-_Clerc_ 的标志解析由 [`type-flag`](https://github.com/privatenumber/type-flag) 提供支持，并具有许多功能：
+_Clerc_ 的选项解析由 [`@clerc/parser`](https://github.com/clercjs/clerc/blob/main/packages/parser) 提供支持，并具有许多功能：
 
 - 数组和自定义类型
-- 标志分隔符：`--flag value`、`--flag=value`、`--flag:value` 和 `--flag.value`
+- 选项分隔符：`--flag value`、`--flag=value`、`--flag:value` 和 `--flag.value`
 - 组合别名：`-abcd 2` → `-a -b -c -d 2`
-- [选项结束符](https://unix.stackexchange.com/a/11382)：传递 `--` 来结束标志解析
-- 未知标志：未预期的标志存储在 `unknownFlags` 中
+- [选项结束符](https://unix.stackexchange.com/a/11382)：传递 `--` 来结束选项解析
 
-阅读 [_type-flag_ 文档](https://github.com/privatenumber/type-flag) 以了解更多信息。
+可以在 `flags` 对象属性中指定选项，其中键是选项名称，值是选项类型函数或描述选项的对象。
 
-可以在 `flags` 对象属性中指定标志，其中键是标志名称，值是标志类型函数或描述标志的对象。
+建议使用驼峰命名法作为选项名称，因为它将被解释为解析短横线分隔的等效选项。
 
-建议使用驼峰命名法作为标志名称，因为它将被解释为解析短横线分隔的等效标志。
+选项类型函数可以是任何接受字符串并返回解析后的值的函数。默认的 JavaScript 构造函数应该涵盖大多数用例：[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String)、[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number)、[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean) 等。
 
-标志类型函数可以是任何接受字符串并返回解析后的值的函数。默认的 JavaScript 构造函数应该涵盖大多数用例：[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String)、[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number)、[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean) 等。
-
-标志描述对象可用于存储有关标志的其他信息，例如 `alias`、`default` 和 `description`。要接受标志的多个值，请将类型函数包装在数组中。
+选项描述对象可用于存储有关选项的其他信息，例如 `alias`、`default` 和 `description`。要接受选项的多个值，请将类型函数包装在数组中。
 
 所有提供的信息将用于生成更好的帮助文档。
 
@@ -163,17 +204,18 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("echo", "回显", {
 		flags: {
 			someBoolean: {
 				type: Boolean,
+				description: "一些布尔选项",
 			},
 
 			someString: {
 				type: String,
-				description: "一些字符串标志",
+				description: "一些字符串选项",
 				default: "n/a",
 			},
 
@@ -183,12 +225,71 @@ const cli = Clerc.create()
 				alias: "n",
 				description: "数字数组。 (例如 -n 1 -n 2 -n 3)",
 			},
+
+			object: {
+				type: object,
+				description: "一个对象选项。 (例如 --object.key value)",
+			},
+
+			counter: {
+				type: [Boolean],
+				description: "一个计数器选项。 (例如 -c -c -c)",
+			},
 		},
 	})
-	.on("echo", (context) => {
-		context.flags.someBoolean; // => true (boolean | undefined)
-		context.flags.someString; // => "hello" (string)
-		context.flags.someNumber; // => [1, 2] (number[])
+	.on("echo", (ctx) => {
+		ctx.flags.someBoolean; // => true (boolean | undefined)
+		ctx.flags.someString; // => "hello" (string)
+		ctx.flags.someNumber; // => [1, 2] (number[])
+		ctx.flags.object; // => { key: "value" } (Record<string, string | boolean>)
+		ctx.flags.counter; // => 2 (number)
+	})
+	.parse();
+```
+
+## 忽略
+
+有时，您可能希望在命令行输入中忽略某些参数或选项。例如 `deno` 的这个用法：
+
+```sh
+deno run --allow-read script.ts --flag
+```
+
+其中， `--flag` 被直接传递给脚本，而不是 `deno`。
+
+您可以使用 `ignore` 属性来指定要忽略的参数或选项，从而实现这种用法。
+
+```ts
+import { Clerc, PARAMETER } from "clerc";
+
+let encounteredParameter = false;
+
+const cli = Clerc.create()
+	.scriptName("deno")
+	.description("Deno CLI")
+	.version("1.0.0")
+	.command("run", "运行脚本", {
+		flags: {
+			allowRead: {
+				type: Boolean,
+				description: "允许读取文件系统",
+			},
+		},
+		parameters: ["<script>", "[args...]"],
+		ignore: (type) => {
+			if (type === PARAMETER && !encounteredParameter) {
+				encounteredParameter = true;
+
+				return false; // 不要忽略第一个参数（脚本名称）
+			}
+
+			// 忽略其余的参数
+			return encounteredParameter;
+		},
+	})
+	.on("run", (ctx) => {
+		// 处理脚本运行
+		ctx.ignored; // => ["--flag"] (string[])
 	})
 	.parse();
 ```
@@ -200,21 +301,19 @@ const cli = Clerc.create()
 ```ts
 import { Clerc, defineCommand } from "clerc";
 
-const command = defineCommand(
-	{
-		name: "test",
-		description: "测试",
-		flags: {},
-		parameters: [],
-	},
-	(context) => {
+const command = defineCommand({
+	name: "test",
+	description: "测试",
+	flags: {},
+	parameters: [],
+	handler: (ctx) => {
 		// 处理程序
 	},
-);
+});
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("一个简单的命令行界面")
+	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command(command)
 	.parse();

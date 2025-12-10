@@ -4,19 +4,25 @@ title: Commands
 
 # Commands
 
-:::info
+## Basic Usage
 
-Most content of this page is adapted from [Cleye](https://github.com/privatenumber/cleye). Thanks!
+```ts
+import { Clerc } from "clerc";
 
-:::
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("A simple CLI")
+	.version("1.0.0")
+	.command("foo", "A foo command")
+	.on("foo", (ctx) => {
+		console.log("It works!");
+	})
+	.parse();
+```
 
-## Options
+This creates a CLI application named `foo-cli` with a command called `foo`. When the user runs `foo-cli foo`, the CLI will output "It works!".
 
-We created a command called "foo" and its description is "foo command" in [Getting Started](./getting-started). And we use `on()` to register a **command handler**. Now we are going to learn how to add **options** to the command.
-
-Options are passed as the third argument in `command(name, description, options?)`.
-
-### Aliases
+## Aliases
 
 You can add an alias for your command:
 
@@ -25,18 +31,18 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command", {
 		alias: "bar",
 	})
-	.on("foo", (context) => {
+	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
 ```
 
-Now both `foo-cli foo` and `foo-cli bar` will log "It works!".
+Now both `foo-cli foo` and `foo-cli bar` will output "It works!".
 
 You can add more aliases:
 
@@ -45,34 +51,70 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command", {
 		alias: ["bar", "baz"],
 	})
-	.on("foo", (context) => {
+	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
 ```
 
-### Parameters
+## Subcommands
 
-#### Common
+You can define subcommands by using spaces in the command name:
 
-Parameters (aka _positional arguments_) are the names that map against argument values. Think of parameters as variable names and arguments as values associated with the variables.
+```js
+import { Clerc } from "clerc";
 
-Parameters can be defined in the `parameters` array-property to make specific arguments accessible by name. This is useful for writing more readable code, enforcing validation, and generating help documentation.
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("A simple CLI")
+	.version("1.0.0")
+	.command("parent child", "A subcommand")
+	.on("parent child", (ctx) => {
+		console.log("Subcommand was called!");
+	})
+	.parse();
+```
 
-Parameters are defined in the following formats:
+## Root Command
 
-- **Required parameters** are indicated by angle brackets (eg. `<parameter name>`).
-- **Optional parameters** are indicated by square brackets (eg. `[parameter name]`).
-- **Spread parameters** are indicated by `...` suffix (eg. `<parameter name...>` or `[parameter name...]`).
+You can define a root command (a command with no name) to handle cases when no subcommand is specified:
 
-Note, required parameters **cannot come after optional parameters**, and spread parameters must be last.
+```js
+import { Clerc } from "clerc";
 
-Parameters can be accessed in camelCase on the `ctx.parameters` property.
+const cli = Clerc.create()
+	.scriptName("foo-cli")
+	.description("A simple CLI")
+	.version("1.0.0")
+	.command("", "Root command")
+	.on("", (ctx) => {
+		console.log("Root command was called!");
+	})
+	.parse();
+```
+
+## Parameters
+
+### General
+
+Parameters (also known as _positional arguments_) are names that correspond to argument values. Think of parameters as variable names and argument values as values associated with variables.
+
+You can define parameters in the `parameters` array property to access specific arguments by name. This is useful for writing more readable code, enforcing validation, and generating help documentation.
+
+Parameters can be defined in the following formats:
+
+- **Required parameters** are denoted by angle brackets (e.g., `<parameter name>`).
+- **Optional parameters** are denoted by square brackets (e.g., `[parameter name]`).
+- **Spread parameters** are denoted by the `...` suffix (e.g., `<parameter name...>` or `[parameter name...]`).
+
+Note that required parameters **cannot come after optional parameters**, and spread parameters must be placed last.
+
+Parameters can be accessed using camelCase notation on the `ctx.parameters` property.
 
 Example:
 
@@ -82,7 +124,7 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command", {
 		parameters: [
@@ -91,27 +133,27 @@ const cli = Clerc.create()
 			"[optional spread...]",
 		],
 	})
-	.on("foo", (context) => {
-		context.parameters.requiredParameter; // => "a" (string)
-		context.parameters.optionalParameter; // => "b" (string | undefined)
-		context.parameters.optionalSpread; // => ["c", "d"] (string[])
+	.on("foo", (ctx) => {
+		ctx.parameters.requiredParameter; // => "a" (string)
+		ctx.parameters.optionalParameter; // => "b" (string | undefined)
+		ctx.parameters.optionalSpread; // => ["c", "d"] (string[])
 	})
 	.parse();
 ```
 
-#### End-of-flags
+### End Flag
 
-End-of-flags (`--`) (aka _end-of-options_) allows users to pass in a subset of arguments. This is useful for passing in arguments that should be parsed separately from the rest of the arguments or passing in arguments that look like flags.
+The end flag (`--`) (also known as _option terminator_) allows users to pass a portion of arguments. This is useful for arguments that should be parsed separately from other arguments or arguments that look like options.
 
-An example of this is [`npm run`](https://docs.npmjs.com/cli/v8/commands/npm-run-script):
+An example is [`npm run`](https://docs.npmjs.com/cli/v8/commands/npm-run-script):
 
 ```sh
 $ npm run <script> -- <script arguments>
 ```
 
-The `--` indicates that all arguments afterwards should be passed into the _script_ rather than _npm_.
+The `--` indicates that all arguments after it should be passed to the _script_ rather than _npm_.
 
-You can specify `--` in the `parameters` array to parse end-of-flags arguments.
+You can specify `--` in the `parameters` array to parse option terminator arguments.
 
 Example:
 
@@ -121,39 +163,36 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("echo", "Echo", {
 		parameters: ["<script>", "--", "[arguments...]"],
 	})
-	.on("echo", (context) => {
-		context.parameters.script; // => "echo" (string)
-		context.parameters.arguments; // => ["hello", "world] (string[])
+	.on("echo", (ctx) => {
+		ctx.parameters.script; // => "echo" (string)
+		ctx.parameters.arguments; // => ["hello", "world"] (string[])
 	})
 	.parse();
 ```
 
-### Flags
+## Options
 
-_Clerc_'s flag parsing is powered by [`type-flag`](https://github.com/privatenumber/type-flag) and comes with many features:
+_Clerc_'s option parsing is powered by [`@clerc/parser`](https://github.com/clercjs/clerc/blob/main/packages/parser) and has many features:
 
-- Array & Custom types
-- Flag delimiters: `--flag value`, `--flag=value`, `--flag:value`, and `--flag.value`
+- Array and custom types
+- Option delimiters: `--flag value`, `--flag=value`, `--flag:value` and `--flag.value`
 - Combined aliases: `-abcd 2` → `-a -b -c -d 2`
-- [End of flags](https://unix.stackexchange.com/a/11382): Pass in `--` to end flag parsing
-- Unknown flags: Unexpected flags stored in `unknownFlags`
+- [Option terminator](https://unix.stackexchange.com/a/11382): pass `--` to end option parsing
 
-Read the [_type-flag_ docs](https://github.com/privatenumber/type-flag) to learn more.
+Options can be specified in the `flags` object property, where the key is the option name and the value is either an option type function or an object describing the option.
 
-Flags can be specified in the `flags` object-property, where the key is the flag name, and the value is a flag type function or an object that describes the flag.
+It's recommended to use camelCase for option names as it will be interpreted as parsing the equivalent kebab-case option.
 
-The flag name is recommended to be in camelCase as it will be interpreted to parse kebab-case equivalents.
+The option type function can be any function that accepts a string and returns the parsed value. The default JavaScript constructors should cover most use cases: [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String), [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number), [Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean), etc.
 
-The flag type function can be any function that accepts a string and returns the parsed value. Default JavaScript constructors should cover most use-cases: [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String), [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number), [Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean), etc.
+The option description object can be used to store additional information about the option, such as `alias`, `default`, and `description`. To accept multiple values for an option, wrap the type function in an array.
 
-The flag description object can be used to store additional information about the flag, such as `alias`, `default`, and `description`. To accept multiple values for a flag, wrap the type function in an array.
-
-All of the provided information will be used to generate better help documentation.
+All provided information will be used to generate better help documentation.
 
 Example:
 
@@ -163,17 +202,18 @@ import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
-	.command("echo", "echo", {
+	.command("echo", "Echo", {
 		flags: {
 			someBoolean: {
 				type: Boolean,
+				description: "Some boolean option",
 			},
 
 			someString: {
 				type: String,
-				description: "Some string flag",
+				description: "Some string option",
 				default: "n/a",
 			},
 
@@ -181,40 +221,97 @@ const cli = Clerc.create()
 				// Wrap the type function in an array to allow multiple values
 				type: [Number],
 				alias: "n",
-				description: "Array of numbers. (eg. -n 1 -n 2 -n 3)",
+				description: "Array of numbers. (e.g. -n 1 -n 2 -n 3)",
+			},
+
+			object: {
+				type: object,
+				description: "An object option. (e.g. --object.key value)",
+			},
+
+			counter: {
+				type: [Boolean],
+				description: "A counter option. (e.g. -c -c -c)",
 			},
 		},
 	})
-	.on("echo", (context) => {
-		context.flags.someBoolean; // => true (boolean | undefined)
-		context.flags.someString; // => "hello" (string)
-		context.flags.someNumber; // => [1, 2] (number[])
+	.on("echo", (ctx) => {
+		ctx.flags.someBoolean; // => true (boolean | undefined)
+		ctx.flags.someString; // => "hello" (string)
+		ctx.flags.someNumber; // => [1, 2] (number[])
+		ctx.flags.object; // => { key: "value" } (Record<string, string | boolean>)
+		ctx.flags.counter; // => 2 (number)
+	})
+	.parse();
+```
+
+## Ignore
+
+Sometimes, you may want to ignore certain arguments or options in the command line input. For example, this usage of `deno`:
+
+```sh
+deno run --allow-read script.ts --flag
+```
+
+Where `--flag` is passed directly to the script, not to `deno`.
+
+You can achieve this usage by using the `ignore` property to specify which arguments or options to ignore.
+
+```ts
+import { Clerc, PARAMETER } from "clerc";
+
+let encounteredParameter = false;
+
+const cli = Clerc.create()
+	.scriptName("deno")
+	.description("Deno CLI")
+	.version("1.0.0")
+	.command("run", "Run script", {
+		flags: {
+			allowRead: {
+				type: Boolean,
+				description: "Allow file system read",
+			},
+		},
+		parameters: ["<script>", "[args...]"],
+		ignore: (type) => {
+			if (type === PARAMETER && !encounteredParameter) {
+				encounteredParameter = true;
+
+				return false; // Don't ignore the first parameter (script name)
+			}
+
+			// Ignore the rest of the parameters
+			return encounteredParameter;
+		},
+	})
+	.on("run", (ctx) => {
+		// Handle script execution
+		ctx.ignored; // => ["--flag"] (string[])
 	})
 	.parse();
 ```
 
 ## Advanced Usage
 
-To seperate handlers from the cli definition, you can use the `defineCommand` utility function:
+To separate the handler from the cli definition, you can use the `defineCommand` utility function:
 
 ```ts
 import { Clerc, defineCommand } from "clerc";
 
-const command = defineCommand(
-	{
-		name: "test",
-		description: "test",
-		flags: {},
-		parameters: [],
+const command = defineCommand({
+	name: "test",
+	description: "Test",
+	flags: {},
+	parameters: [],
+	handler: (ctx) => {
+		// Handler
 	},
-	(context) => {
-		// handler
-	},
-);
+});
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command(command)
 	.parse();

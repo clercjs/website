@@ -3,8 +3,8 @@ layout: home
 
 hero:
   name: "Clerc"
-  text: "Full-featured CLI library"
-  tagline: CLI library for Node.js, Deno and Bun
+  text: "Full-featured CLI Library"
+  tagline: For Node.js, Deno and Bun
   image:
     src: /Banner.webp
     alt: Clerc logo
@@ -13,26 +13,26 @@ hero:
       text: Getting Started
       link: /getting-started
     - theme: alt
-      text: API References (unavailable now)
+      text: API Reference (Not available yet)
       link: /
 
 features:
-  - title: Lightweight
-    details: Dependencies are bundled and minified
-    icon: 🎈
-  - title: Plugin system
-    details: Add rich features on demand
+  - title: Plugin System
+    details: Add rich functionality according to your needs
     icon: 💉
-  - title: Developer friendly
-    details: Strongly typed, converts flags and parameters to camelCase
-    icon: 💻
-  - title: Chainable APIs
-    details: Composable
+  - title: Chainable API
+    details: Composable API
     icon: 🛠️
-  - title: Parses parameters
-    details: No need to read them by yourself
+  - title: Developer Friendly
+    details: Strongly typed, converts flags to camelCase
+    icon: 💻
+  - title: Argument Parsing
+    details: No need to handle annoying `process.argv` parsing yourself
     icon: 🧬
-  - title: i18n
-    details: Easy to change different locales
-    icon: 🏳️
+  - title: Multi-platform Support
+    details: Works on Node.js, Deno and Bun
+    icon: 🌐
+  - title: High Performance
+    details: Self-implemented fast and efficient parser `@clerc/parser`, only 30% slower than `mri`
+    icon: ⚡
 ---

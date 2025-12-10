@@ -13,7 +13,7 @@ const members = [
 	{
 		avatar: "https://avatars.githubusercontent.com/u/58381667?v=4",
 		name: "Ray",
-		title: "Creator, Documentation",
+		title: "Source code author, documentation writer",
 		links: [
 			{ icon: "github", link: "https://github.com/so1ve" },
 			{ icon: "twitter", link: "https://twitter.com/so1v3" },
@@ -22,7 +22,7 @@ const members = [
 	{
 		avatar: "https://avatars.githubusercontent.com/u/73536163?v=4",
 		name: "Shizuku",
-		title: "Documentation",
+		title: "Documentation maintenance, translation",
 		links: [
 			{ icon: "github", link: "https://github.com/ifshizuku" },
 			{ icon: "twitter", link: "https://twitter.com/ifszk" },

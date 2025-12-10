@@ -4,85 +4,97 @@ title: Interceptors
 
 # Interceptors
 
-An interceptor is a function that runs before or after calling the command handler, like middleware in koa.
+Interceptors are functions that run before or after the command handler is called, similar to middleware in web development.
 
 ## Usage
 
-Interceptors are added to the cli using the `interceptor` method:
+You can add interceptors to your CLI using the `interceptor` method:
 
 ```ts
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command")
-	.interceptor((context, next) => {
+	.interceptor(async (ctx, next) => {
 		console.log("Before foo");
-		// You can inject something into the context, or modify the context
-		context.foo = "bar";
-		next(); // Call next to continue
+		// You can access the context
+		console.log(ctx.resolved); // Was a matching command found?
+		await next(); // Call next to continue execution
+		console.log("After foo");
 	})
 	.parse();
 ```
 
+:::warning
+
+Attention! When calling `next`, make sure to use `await`, otherwise errors might not be caught properly!
+
+:::
+
 ## Order
 
-The interceptor method accepts either a function or an object:
+The `interceptor` method accepts either a function or an object:
 
 ```ts
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command")
 	.interceptor({
-		enforce: "normal", // default, or 'pre', 'post'
-		fn: (context, next) => {
+		enforce: "normal", // Default, or "pre", "post"
+		handler: async (ctx, next) => {
 			console.log("Before foo");
-			// You can inject something into the context, or modify the context
-			context.foo = "bar";
-			next(); // Call next to continue
+			// You can access the context
+			console.log(ctx.resolved); // Was a matching command found?
+			await next(); // Call next to continue execution
+			console.log("After foo");
 		},
 	})
 	.parse();
 ```
 
-So the order of execution is:
+Therefore, the execution order is as follows:
 
 1. Pre interceptors
 2. Normal interceptors
 3. Post interceptors
 
-## Call after command handler
+## Calling After the Command Handler
 
-You can do something after the command handler is called by doing things after calling `next()`:
+By performing operations after calling `next()`, you can execute some actions after the command handler is called:
 
 ```ts
 import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command")
-	.interceptor((context, next) => {
+	.interceptor(async (ctx, next) => {
 		console.log("Before foo");
-		// You can inject something into the context, or modify the context
-		context.foo = "bar";
-		next(); // Call next to continue
+		// You can access the context
+		console.log(ctx.resolved); // Was a matching command found?
+		await next(); // Call next to continue execution
 		console.log("After foo");
 	})
-	.on("foo", (context) => {
-		console.log("It works!");
+	.on("foo", (ctx) => {
+		console.log("It ran!");
 	})
 	.parse();
 
 // The output is:
 // Before foo
-// It works!
+// It ran!
 // After foo
 ```
+
+## Context Type
+
+The context type for interceptors is `InterceptorContext`, which is currently an alias for `BaseContext`, but provides better IDE type display. [See the context documentation](./context) for more information.

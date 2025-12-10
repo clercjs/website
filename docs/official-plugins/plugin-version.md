@@ -1,0 +1,52 @@
+---
+title: Version Plugin
+---
+
+# @clerc/plugin-version
+
+A plugin that adds a version command to your CLI.
+
+## 📦 Installation
+
+:::code-group
+
+```sh [npm]
+$ npm install @clerc/plugin-version
+```
+
+```sh [yarn]
+$ yarn add @clerc/plugin-version
+```
+
+```sh [pnpm]
+$ pnpm add @clerc/plugin-version
+```
+
+:::
+
+## 🚀 Usage
+
+### Basic Usage
+
+```ts
+import { versionPlugin } from "@clerc/plugin-version"; // or import directly from clerc
+import { Clerc } from "clerc";
+
+const cli = Clerc.create()
+	.scriptName("my-cli")
+	.description("My CLI application")
+	.version("1.0.0")
+	.use(versionPlugin()) // Add version plugin
+	.parse();
+```
+
+### Running Effect
+
+```bash
+# Display version information
+$ node my-cli --version
+# or
+$ node my-cli version
+
+# Output: v1.0.0
+```

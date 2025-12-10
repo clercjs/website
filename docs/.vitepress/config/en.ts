@@ -1,4 +1,13 @@
+import { join } from "node:path";
+
 import { defineConfig } from "vitepress";
+
+import { getPluginNavigation } from "./plugin-navigation";
+
+const pluginNavigation = await getPluginNavigation(
+	join(import.meta.dirname, "..", "..", "official-plugins"),
+	"/official-plugins",
+);
 
 export const enConfig = defineConfig({
 	lang: "en-US",
@@ -11,12 +20,12 @@ export const enConfig = defineConfig({
 				link: "/getting-started",
 			},
 			{
-				text: "Members",
-				link: "/members",
+				text: "Official Plugins",
+				items: pluginNavigation,
 			},
 			{
-				text: "Sponsor (CN)",
-				link: "https://afdian.net/a/so1ve",
+				text: "Members",
+				link: "/members",
 			},
 		],
 		sidebar: [
@@ -36,6 +45,10 @@ export const enConfig = defineConfig({
 						link: "/interceptors",
 					},
 					{
+						text: "Context",
+						link: "/context",
+					},
+					{
 						text: "Plugins",
 						link: "/plugins",
 					},
@@ -43,7 +56,7 @@ export const enConfig = defineConfig({
 			},
 			{
 				text: "Official Plugins",
-				link: "/official-plugins",
+				items: pluginNavigation,
 			},
 		],
 		editLink: {

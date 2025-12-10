@@ -4,11 +4,17 @@ title: Getting Started
 
 # Getting Started
 
+:::warning
+
+Clerc only supports ESM!
+
+:::
+
 ## Installation
 
 :::info
 
-The `clerc` packages re-exports `@clerc/core` and all plugins, so it may increase your bundle size. To reduce, please install `@clerc/core` and plugins on demand.
+The `clerc` package re-exports `@clerc/core` and all plugins, which may increase your bundle size, though it won't have much impact if your bundler supports tree-shaking. To reduce size, please install `@clerc/core` and plugins as needed.
 
 :::
 
@@ -18,39 +24,40 @@ The `clerc` packages re-exports `@clerc/core` and all plugins, so it may increas
 $ npm install clerc
 ```
 
-```sh [pnpm]
-$ pnpm add clerc
-```
-
 ```sh [yarn]
 $ yarn add clerc
 ```
 
+```sh [pnpm]
+$ pnpm add clerc
+```
+
 :::
 
-## Usage
+## Simplest CLI Example
 
-First, create a file called `foo-cli.mjs`:
+Install clerc, and create a file named `cli.mjs`:
 
-```js
+```ts
 import { Clerc } from "clerc";
 
-const cli = Clerc.create()
-	.name("Foo CLI") // Optional, defaults to scriptName
-	.scriptName("foo-cli")
-	.description("A simple cli")
-	.version("1.0.0") // You can use Clerc.create(name, description, version) instead
-	.command("foo", "A foo command")
-	.on("foo", (context) => {
-		console.log("It works!");
-	})
-	.parse();
+Clerc.create() // Create a new Clerc instance
+	.scriptName("foo") // CLI script name
+	.description("A foo CLI") // CLI description
+	.version("0.0.0") // CLI version
+	.command(
+		"bar", // Command name
+		"A bar command", // Command description
+	)
+	.on(
+		"bar",
+		(
+			_ctx, // Command context, but we're not using it yet
+		) => {
+			console.log("Hello, world from Clerc.js!");
+		},
+	)
+	.parse(); // Parse arguments and run!
 ```
 
-Then, run it:
-
-```sh
-$ node ./foo-cli.mjs foo
-```
-
-This logs `"It works!"`.
+Then run: `node cli.mjs bar`. It should output in your shell: `Hello, world from Clerc.js!`

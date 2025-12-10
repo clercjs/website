@@ -1,14 +1,14 @@
 ---
-title: plugins
+title: Plugins
 ---
 
 # Plugins
 
-A plugin is a function that accepts a `Clerc` instance and returns a `Clerc` instance.
+A plugin is a function that can accept a `Clerc` instance and extend it.
 
 :::info
 
-the return value is not required technically, but it is recommended to return the `Clerc` instance for better type inference.
+The plugin system allows you to add rich functionality according to your needs.
 
 :::
 
@@ -19,15 +19,39 @@ import { Clerc, definePlugin } from "clerc";
 
 const plugin = definePlugin({
 	setup: (cli) =>
-		cli.command("foo", "A foo command").on("foo", (context) => {
+		cli.command("foo", "A foo command").on("foo", (ctx) => {
 			console.log("It works!");
 		}),
 });
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
-	.description("A simple cli")
+	.description("A simple CLI")
 	.version("1.0.0")
 	.use(plugin)
 	.parse();
 ```
+
+## Development
+
+In the `setup` function, you can directly get the `Clerc` instance and perform various configurations and extensions on it, such as adding commands, event listeners, etc.
+
+```ts
+import { definePlugin } from "clerc";
+
+export const myPlugin = definePlugin({
+	setup: (cli) => {
+		// Extend the cli here
+		return cli.command("bar", "A bar command").on("bar", (ctx) => {
+			console.log("Bar command executed!");
+		});
+	},
+});
+```
+
+## Publishing Plugins
+
+While not mandatory, it is recommended that you follow the following conventions when publishing plugins to make it easier for users to identify and use your plugins:
+
+- Use `clerc-plugin-<name>` as the package name.
+- Add the keyword `clerc-plugin` in `package.json`.
