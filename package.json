@@ -2,11 +2,11 @@
 	"name": "clerc-website",
 	"private": true,
 	"scripts": {
-		"docs:build": "vitepress build docs",
-		"docs:dev": "vitepress dev docs",
-		"docs:preview": "vitepress preview docs",
+		"build": "vitepress build docs",
+		"dev": "vitepress dev docs",
 		"lint": "eslint . && prettier . --check",
-		"lint:fix": "eslint . --fix && prettier . --write"
+		"lint:fix": "eslint . --fix && prettier . --write",
+		"preview": "vitepress preview docs"
 	},
 	"devDependencies": {
 		"@so1ve/eslint-config": "^3.18.1",
