@@ -1,6 +1,7 @@
 {
 	"name": "clerc-website",
 	"private": true,
+	"packageManager": "pnpm@10.24.0",
 	"type": "module",
 	"scripts": {
 		"build": "vitepress build docs",
