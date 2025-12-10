@@ -6,13 +6,16 @@
 		"dev": "vitepress dev docs",
 		"lint": "eslint . && prettier . --check",
 		"lint:fix": "eslint . --fix && prettier . --write",
-		"preview": "vitepress preview docs"
+		"preview": "vitepress preview docs",
+		"typecheck": "tsgo --noEmit"
 	},
 	"devDependencies": {
 		"@so1ve/eslint-config": "^3.18.1",
 		"@so1ve/prettier-config": "^3.18.1",
+		"@typescript/native-preview": "7.0.0-dev.20251210.1",
 		"eslint": "^9.39.1",
 		"prettier": "^3.7.4",
+		"typescript": "^5.9.3",
 		"unocss": "^66.5.10",
 		"vitepress": "2.0.0-alpha.15"
 	}
