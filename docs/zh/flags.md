@@ -23,6 +23,113 @@ _Clerc_ 的选项解析由 [`@clerc/parser`](https://github.com/clercjs/clerc/bl
 
 所有提供的信息将用于生成更好的帮助文档。
 
+## 选项别名
+
+选项别名允许用户使用更短的或替代的名称来指定选项。这对于为常用的选项提供便捷的快捷方式很有用。
+
+### 单个别名
+
+你可以使用字符串为选项定义单个别名：
+
+```ts
+const cli = Clerc.create()
+	.command("build", "构建项目", {
+		flags: {
+			output: {
+				type: String,
+				alias: "o",
+				description: "输出目录",
+			},
+
+			verbose: {
+				type: Boolean,
+				alias: "v",
+				description: "启用详细输出",
+			},
+		},
+	})
+	.on("build", (ctx) => {
+		// $ node cli.mjs build --output dist
+		// $ node cli.mjs build -o dist
+		// 两者的工作方式相同
+
+		// $ node cli.mjs build --verbose
+		// $ node cli.mjs build -v
+		// 两者都启用详细输出
+	})
+	.parse();
+```
+
+### 多个别名
+
+你可以使用数组为选项定义多个别名：
+
+```ts
+const cli = Clerc.create()
+	.command("config", "配置应用", {
+		flags: {
+			config: {
+				type: String,
+				alias: ["c", "cfg"],
+				description: "配置文件路径",
+			},
+
+			format: {
+				type: String,
+				alias: ["f", "fmt"],
+				description: "输出格式",
+			},
+		},
+	})
+	.on("config", (ctx) => {
+		// 所有这些都可以工作：
+		// $ node cli.mjs config --config file.json
+		// $ node cli.mjs config -c file.json
+		// $ node cli.mjs config -cfg file.json
+
+		// $ node cli.mjs config --format json
+		// $ node cli.mjs config -f json
+		// $ node cli.mjs config -fmt json
+	})
+	.parse();
+```
+
+### 组合短别名
+
+使用短别名（单个字符）时，它们可以组合在一起：
+
+```ts
+const cli = Clerc.create()
+	.command("compress", "压缩文件", {
+		flags: {
+			output: {
+				type: String,
+				alias: "o",
+				description: "输出文件",
+			},
+
+			verbose: {
+				type: Boolean,
+				alias: "v",
+				description: "详细输出",
+			},
+
+			recursive: {
+				type: Boolean,
+				alias: "r",
+				description: "递归模式",
+			},
+		},
+	})
+	.on("compress", (ctx) => {
+		// $ node cli.mjs compress -vrh input.zip
+		// 等同于：
+		// $ node cli.mjs compress -v -r -h input.zip
+		// 这设置了：verbose = true，recursive = true，并将 "input.zip" 作为参数传递
+	})
+	.parse();
+```
+
 ## 基本用法
 
 ```ts

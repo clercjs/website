@@ -24,7 +24,13 @@ This creates a CLI application named `foo-cli` with a command called `foo`. When
 
 ## Aliases
 
-You can add an alias for your command:
+### Overview
+
+Command aliases allow users to invoke a command using an alternative name. This is useful for providing shorter or more intuitive command names.
+
+### Single Alias
+
+You can define a single alias for a command using a string:
 
 ```ts
 const cli = Clerc.create()
@@ -32,7 +38,7 @@ const cli = Clerc.create()
 	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command", {
-		alias: "bar",
+		alias: "f",
 	})
 	.on("foo", (ctx) => {
 		console.log("It works!");
@@ -40,9 +46,11 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-Now both `foo-cli foo` and `foo-cli bar` will output "It works!".
+Now both `foo-cli foo` and `foo-cli f` will output "It works!".
 
-You can add more aliases:
+### Multiple Aliases
+
+You can define multiple aliases for a command using an array:
 
 ```ts
 const cli = Clerc.create()
@@ -50,12 +58,53 @@ const cli = Clerc.create()
 	.description("A simple CLI")
 	.version("1.0.0")
 	.command("foo", "A foo command", {
-		alias: ["bar", "baz"],
+		alias: ["f", "bar", "baz"],
 	})
 	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
+```
+
+Now `foo-cli foo`, `foo-cli f`, `foo-cli bar`, and `foo-cli baz` all work the same way.
+
+### Practical Examples
+
+#### Example: Git-like Abbreviations
+
+```ts
+const cli = Clerc.create()
+	.scriptName("git")
+	.command("status", "Show working tree status", {
+		alias: "st",
+	})
+	.on("status", (ctx) => {
+		console.log("On branch main...");
+	})
+	.command("commit", "Record changes to repository", {
+		alias: ["ci", "com"],
+	})
+	.on("commit", (ctx) => {
+		console.log("Committing changes...");
+	})
+	.command("checkout", "Switch branches or restore files", {
+		alias: "co",
+	})
+	.on("checkout", (ctx) => {
+		console.log("Checking out...");
+	})
+	.parse();
+```
+
+Usage:
+
+```sh
+$ git st
+$ git commit
+$ git ci
+$ git com
+$ git checkout
+$ git co
 ```
 
 ## Subcommands

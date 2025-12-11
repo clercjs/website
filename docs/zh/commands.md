@@ -26,7 +26,13 @@ const cli = Clerc.create()
 
 ## 别名
 
-你可以为你的命令添加一个别名：
+### 概述
+
+命令别名允许用户使用替代名称来调用命令。这对于提供更短或更直观的命令名称很有用。
+
+### 单个别名
+
+你可以使用字符串为命令定义单个别名：
 
 ```ts
 const cli = Clerc.create()
@@ -34,7 +40,7 @@ const cli = Clerc.create()
 	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令", {
-		alias: "bar",
+		alias: "f",
 	})
 	.on("foo", (ctx) => {
 		console.log("It works!");
@@ -42,9 +48,11 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-现在 `foo-cli foo` 和 `foo-cli bar` 都会输出 "It works!"。
+现在 `foo-cli foo` 和 `foo-cli f` 都会输出 "It works!"。
 
-你可以添加更多的别名：
+### 多个别名
+
+你可以使用数组为命令定义多个别名：
 
 ```ts
 const cli = Clerc.create()
@@ -52,12 +60,53 @@ const cli = Clerc.create()
 	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command("foo", "一个 foo 命令", {
-		alias: ["bar", "baz"],
+		alias: ["f", "bar", "baz"],
 	})
 	.on("foo", (ctx) => {
 		console.log("It works!");
 	})
 	.parse();
+```
+
+现在 `foo-cli foo`、`foo-cli f`、`foo-cli bar` 和 `foo-cli baz` 都以相同的方式工作。
+
+### 实践示例
+
+#### 示例：Git 风格的缩写
+
+```ts
+const cli = Clerc.create()
+	.scriptName("git")
+	.command("status", "显示工作树状态", {
+		alias: "st",
+	})
+	.on("status", (ctx) => {
+		console.log("在分支 main 上...");
+	})
+	.command("commit", "记录对存储库的更改", {
+		alias: ["ci", "com"],
+	})
+	.on("commit", (ctx) => {
+		console.log("提交更改...");
+	})
+	.command("checkout", "切换分支或恢复文件", {
+		alias: "co",
+	})
+	.on("checkout", (ctx) => {
+		console.log("检出中...");
+	})
+	.parse();
+```
+
+使用：
+
+```sh
+$ git st
+$ git commit
+$ git ci
+$ git com
+$ git checkout
+$ git co
 ```
 
 ## 子命令

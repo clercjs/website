@@ -23,7 +23,114 @@ The flag description object can be used to store additional information about th
 
 All provided information will be used to generate better help documentation.
 
-Example:
+## Flag Aliases
+
+Flag aliases allow users to use shorter or alternative names for flags. This is useful for providing convenient shortcuts for commonly used flags.
+
+### Single Alias
+
+You can define a single alias for a flag using a string:
+
+```ts
+const cli = Clerc.create()
+	.command("build", "Build the project", {
+		flags: {
+			output: {
+				type: String,
+				alias: "o",
+				description: "Output directory",
+			},
+
+			verbose: {
+				type: Boolean,
+				alias: "v",
+				description: "Enable verbose output",
+			},
+		},
+	})
+	.on("build", (ctx) => {
+		// $ node cli.mjs build --output dist
+		// $ node cli.mjs build -o dist
+		// Both work the same way
+
+		// $ node cli.mjs build --verbose
+		// $ node cli.mjs build -v
+		// Both enable verbose output
+	})
+	.parse();
+```
+
+### Multiple Aliases
+
+You can define multiple aliases for a flag using an array:
+
+```ts
+const cli = Clerc.create()
+	.command("config", "Configure the application", {
+		flags: {
+			config: {
+				type: String,
+				alias: ["c", "cfg"],
+				description: "Configuration file path",
+			},
+
+			format: {
+				type: String,
+				alias: ["f", "fmt"],
+				description: "Output format",
+			},
+		},
+	})
+	.on("config", (ctx) => {
+		// All of these work:
+		// $ node cli.mjs config --config file.json
+		// $ node cli.mjs config -c file.json
+		// $ node cli.mjs config -cfg file.json
+
+		// $ node cli.mjs config --format json
+		// $ node cli.mjs config -f json
+		// $ node cli.mjs config -fmt json
+	})
+	.parse();
+```
+
+### Combined Short Aliases
+
+When using short aliases (single characters), they can be combined together:
+
+```ts
+const cli = Clerc.create()
+	.command("compress", "Compress files", {
+		flags: {
+			output: {
+				type: String,
+				alias: "o",
+				description: "Output file",
+			},
+
+			verbose: {
+				type: Boolean,
+				alias: "v",
+				description: "Verbose output",
+			},
+
+			recursive: {
+				type: Boolean,
+				alias: "r",
+				description: "Recursive mode",
+			},
+		},
+	})
+	.on("compress", (ctx) => {
+		// $ node cli.mjs compress -vrh input.zip
+		// Is equivalent to:
+		// $ node cli.mjs compress -v -r -h input.zip
+		// Which sets: verbose = true, recursive = true, and passes "input.zip" as a parameter
+	})
+	.parse();
+```
+
+## Basic Usage
 
 ```ts
 // $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
