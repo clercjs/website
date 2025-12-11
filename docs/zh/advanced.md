@@ -9,13 +9,13 @@ title: 进阶用法
 Clerc 允许您传入自定义参数数组，而不是默认使用 `process.argv` / `Deno.args`。这在测试或特定环境下非常有用。
 
 ```ts
-Clerc.create().parse(["node", "my-cli", "greet"]); // 传入自定义参数数组
+Cli().parse(["node", "my-cli", "greet"]); // 传入自定义参数数组
 ```
 
 或者您也可以传入一个参数对象：
 
 ```ts
-Clerc.create().parse({
+Cli().parse({
 	argv: ["greet"],
 });
 ```
@@ -25,7 +25,7 @@ Clerc.create().parse({
 有时您可能只想解析命令和选项，而不立即执行命令处理程序。Clerc 提供了一个选项来实现这一点：
 
 ```ts
-const result = Clerc.create().parse({
+const result = Cli().parse({
 	run: false, // 仅解析，不执行
 });
 ```

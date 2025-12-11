@@ -15,7 +15,7 @@ title: 插件
 ## 使用方法
 
 ```ts
-import { Clerc, definePlugin } from "clerc";
+import { definePlugin } from "clerc";
 
 const plugin = definePlugin({
 	setup: (cli) =>
@@ -24,7 +24,7 @@ const plugin = definePlugin({
 		}),
 });
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")

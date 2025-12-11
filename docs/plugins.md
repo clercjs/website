@@ -15,7 +15,7 @@ The plugin system allows you to add rich functionality according to your needs.
 ## Usage
 
 ```ts
-import { Clerc, definePlugin } from "clerc";
+import { definePlugin } from "clerc";
 
 const plugin = definePlugin({
 	setup: (cli) =>
@@ -24,7 +24,7 @@ const plugin = definePlugin({
 		}),
 });
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
 	.version("1.0.0")

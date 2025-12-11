@@ -32,7 +32,7 @@ _Clerc_ 的选项解析由 [`@clerc/parser`](https://github.com/clercjs/clerc/bl
 你可以使用字符串为选项定义单个别名：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("build", "构建项目", {
 		flags: {
 			output: {
@@ -64,7 +64,7 @@ const cli = Clerc.create()
 你可以使用数组为选项定义多个别名：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("config", "配置应用", {
 		flags: {
 			config: {
@@ -97,7 +97,7 @@ const cli = Clerc.create()
 使用短别名（单个字符）时，它们可以组合在一起：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("compress", "压缩文件", {
 		flags: {
 			output: {
@@ -133,7 +133,7 @@ const cli = Clerc.create()
 ```ts
 // $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -194,7 +194,7 @@ const cli = Clerc.create()
 **默认值行为：** 如果未指定该选项，其值为 `undefined`（除非设置了 `default` 属性）。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("greet", "问候", {
 		flags: {
 			name: {
@@ -228,7 +228,7 @@ const cli = Clerc.create()
 **默认值行为：** 如果未指定该选项，其值为 `false`。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("build", "构建项目", {
 		flags: {
 			production: {
@@ -260,7 +260,7 @@ const cli = Clerc.create()
 Boolean 类型支持 `negatable` 属性，允许你决定是否启用否定选项。默认情况下，`negatable` 为 `true`，这意味着默认情况下 `--no-flag` 会将 `flag` 选项设置为 `false`。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("start", "启动应用", {
 		flags: {
 			color: {
@@ -301,7 +301,7 @@ const cli = Clerc.create()
 **默认值行为：** 如果未指定该选项，其值为 `[]`（空数组）。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("copy", "复制文件", {
 		flags: {
 			// 使用 [String] 来接受多个字符串值
@@ -350,7 +350,7 @@ $ node cli.mjs config --define:env=production --define:version=1.0.0
 **默认值行为：** 如果未指定该选项，其值为 `0`。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("log", "显示日志", {
 		flags: {
 			// [Boolean] 类型会计数选项被使用的次数
@@ -384,7 +384,7 @@ const cli = Clerc.create()
 **默认值行为：** 如果未指定该选项，其值为 `{}`（空对象）。
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("config", "配置应用", {
 		flags: {
 			define: {
@@ -413,7 +413,7 @@ Clerc 提供了一些内置的高级选项类型，方便处理常见的需求�
 ```ts
 import { Choices } from "clerc";
 
-Clerc.create()
+Cli()
 	.command("serve", "启动服务器", {
 		flags: {
 			mode: {
@@ -439,7 +439,7 @@ Clerc.create()
 const CommaSeparatedList = (value: string): string[] =>
 	value.split(",").map((item) => item.trim());
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("custom-cli")
 	.description("一个使用自定义选项类型的 CLI")
 	.version("1.0.0")

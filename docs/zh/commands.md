@@ -9,9 +9,7 @@ title: 命令
 ## 基础用法
 
 ```ts
-import { Clerc } from "clerc";
-
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -35,7 +33,7 @@ const cli = Clerc.create()
 你可以使用字符串为命令定义单个别名：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -55,7 +53,7 @@ const cli = Clerc.create()
 你可以使用数组为命令定义多个别名：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -75,7 +73,7 @@ const cli = Clerc.create()
 #### 示例：Git 风格的缩写
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("git")
 	.command("status", "显示工作树状态", {
 		alias: "st",
@@ -114,7 +112,7 @@ $ git co
 你可以通过在命令名称中使用空格来定义子命令：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -130,7 +128,7 @@ const cli = Clerc.create()
 你可以定义一个根命令（没有名称的命令）来处理没有指定子命令时的情况：
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -164,7 +162,7 @@ const cli = Clerc.create()
 ```ts
 // $ node ./foo-cli.mjs a b c d
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -204,7 +202,7 @@ $ npm run <script> -- <script arguments>
 ```ts
 // $ node ./foo-cli.mjs echo -- hello world
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
@@ -237,11 +235,11 @@ deno run --allow-read script.ts --flag
 您可以使用 `ignore` 属性来指定要忽略的参数或选项，从而实现这种用法。
 
 ```ts
-import { Clerc, PARAMETER } from "clerc";
+import { PARAMETER } from "clerc";
 
 let encounteredParameter = false;
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("deno")
 	.description("Deno CLI")
 	.version("1.0.0")
@@ -277,7 +275,7 @@ const cli = Clerc.create()
 为了将处理程序与 cli 定义分离，可以使用 `defineCommand` 实用函数：
 
 ```ts
-import { Clerc, defineCommand } from "clerc";
+import { defineCommand } from "clerc";
 
 const command = defineCommand({
 	name: "test",
@@ -289,10 +287,144 @@ const command = defineCommand({
 	},
 });
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
 	.version("1.0.0")
 	.command(command)
+	.parse();
+```
+
+## 懒加载
+
+懒加载允许你延迟加载命令处理器，直到它们被实际调用。这对于减少启动时间和内存使用非常有用，特别是当你有许多命令或重量级处理器时。
+
+你可以通过在处理器中使用动态导入（`await import()`）来实现懒加载：
+
+### 基本懒加载
+
+```ts
+const cli = Cli()
+	.scriptName("app")
+	.description("一个带有懒加载的应用程序")
+	.version("1.0.0")
+	.command("build", "构建项目", {
+		flags: {
+			production: {
+				type: Boolean,
+				description: "为生产环境构建",
+			},
+		},
+	})
+	.on("build", async (ctx) => {
+		// 处理器仅在调用命令时加载
+		const { buildProject } = await import("./handlers/build.js");
+		await buildProject(ctx);
+	})
+	.command("deploy", "部署应用程序", {
+		flags: {
+			environment: {
+				type: String,
+				default: "staging",
+				description: "目标环境",
+			},
+		},
+	})
+	.on("deploy", async (ctx) => {
+		// 另一个懒加载的处理器
+		const { deploy } = await import("./handlers/deploy.js");
+		await deploy(ctx);
+	})
+	.parse();
+```
+
+### 使用 defineCommand 的懒加载
+
+你也可以将懒加载与 `defineCommand` 实用函数结合使用：
+
+```ts
+import { defineCommand } from "clerc";
+
+const command = defineCommand({
+	name: "migrate",
+	description: "运行数据库迁移",
+	flags: {},
+	parameters: [],
+	handler: async (ctx) => {
+		// 处理器仅在调用命令时加载
+		const { runMigrations } = await import("./handlers/migrate.js");
+		await runMigrations(ctx);
+	},
+});
+
+const cli = Cli()
+	.scriptName("app")
+	.description("带有懒加载命令的应用程序")
+	.version("1.0.0")
+	.command(command)
+	.parse();
+```
+
+### 优势
+
+- **更快的启动时间**：仅加载被调用命令的处理器
+- **更低的内存使用**：未使用的处理器不消耗内存
+- **更好的可扩展性**：易于添加许多命令而不影响性能
+- **异步操作**：处理器可以执行异步操作，如文件 I/O 或网络请求
+
+### 示例：模块化命令结构
+
+目录结构：
+
+```
+project/
+├── cli.ts
+├── handlers/
+│   ├── build.ts
+│   ├── dev.ts
+│   ├── deploy.ts
+│   └── test.ts
+```
+
+`handlers/build.ts`：
+
+```ts
+export async function buildProject(ctx) {
+	if (ctx.flags.production) {
+		console.log("为生产环境构建...");
+	} else {
+		console.log("为开发环境构建...");
+	}
+}
+```
+
+`cli.ts`：
+
+```ts
+const cli = Cli()
+	.scriptName("app")
+	.version("1.0.0")
+	.command("build", "构建项目", {
+		flags: {
+			production: {
+				type: Boolean,
+				description: "为生产环境构建",
+			},
+		},
+	})
+	.on("build", async (ctx) => {
+		const { buildProject } = await import("./handlers/build.js");
+		await buildProject(ctx);
+	})
+	.command("dev", "启动开发服务器", {})
+	.on("dev", async (ctx) => {
+		const { startDev } = await import("./handlers/dev.js");
+		await startDev(ctx);
+	})
+	.command("deploy", "部署应用程序")
+	.on("deploy", async (ctx) => {
+		const { deploy } = await import("./handlers/deploy.js");
+		await deploy(ctx);
+	})
 	.parse();
 ```

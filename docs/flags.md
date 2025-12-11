@@ -32,7 +32,7 @@ Flag aliases allow users to use shorter or alternative names for flags. This is 
 You can define a single alias for a flag using a string:
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("build", "Build the project", {
 		flags: {
 			output: {
@@ -64,7 +64,7 @@ const cli = Clerc.create()
 You can define multiple aliases for a flag using an array:
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("config", "Configure the application", {
 		flags: {
 			config: {
@@ -97,7 +97,7 @@ const cli = Clerc.create()
 When using short aliases (single characters), they can be combined together:
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("compress", "Compress files", {
 		flags: {
 			output: {
@@ -133,7 +133,7 @@ const cli = Clerc.create()
 ```ts
 // $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
 	.version("1.0.0")
@@ -189,7 +189,7 @@ The `String` type is used for flags that accept string values. This is the most 
 **Default value behavior:** If the flag is not specified, its value is `undefined` (unless a `default` property is set).
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("greet", "Greet someone", {
 		flags: {
 			name: {
@@ -223,7 +223,7 @@ The `Boolean` type is used for creating boolean switch flags. By default, simply
 **Default value behavior:** If the flag is not specified, its value is `false`.
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("build", "Build the project", {
 		flags: {
 			production: {
@@ -255,7 +255,7 @@ const cli = Clerc.create()
 The Boolean type supports a `negatable` property that allows you to decide whether to enable negated flags. By default, `negatable` is `true`, which means `--no-flag` will set the `flag` flag to `false`.
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("start", "Start the application", {
 		flags: {
 			color: {
@@ -296,7 +296,7 @@ The `Array` type is used for flags that accept multiple values. Define it by wra
 **Default value behavior:** If the flag is not specified, its value is `[]` (empty array).
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("copy", "Copy files", {
 		flags: {
 			// Use [String] to accept multiple string values
@@ -345,7 +345,7 @@ The counter type is used to count how many times a flag is specified. This can b
 **Default value behavior:** If the flag is not specified, its value is `0`.
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("log", "Display logs", {
 		flags: {
 			// [Boolean] type counts how many times the flag is used
@@ -379,7 +379,7 @@ The `Object` type is used for flags that accept key-value pairs. Use dots or oth
 **Default value behavior:** If the flag is not specified, its value is `{}` (empty object).
 
 ```ts
-const cli = Clerc.create()
+const cli = Cli()
 	.command("config", "Configure the application", {
 		flags: {
 			define: {
@@ -408,7 +408,7 @@ Clerc provides some built-in advanced flag types to facilitate common needs:
 ```ts
 import { Choices } from "clerc";
 
-Clerc.create()
+Cli()
 	.command("serve", "Start the server", {
 		flags: {
 			mode: {
@@ -434,7 +434,7 @@ You can create custom flag types by providing a custom type function. The type f
 const CommaSeparatedList = (value: string): string[] =>
 	value.split(",").map((item) => item.trim());
 
-const cli = Clerc.create()
+const cli = Cli()
 	.scriptName("custom-cli")
 	.description("A CLI using a custom flag type")
 	.version("1.0.0")

@@ -5,6 +5,7 @@ const TAB_SIZE = 2;
 // @keep-sorted
 export const clercImports = [
 	"Clerc",
+	"Cli",
 	"completionsPlugin",
 	"friendlyErrorPlugin",
 	"helpPlugin",
