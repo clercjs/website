@@ -28,9 +28,7 @@ const cli = Clerc.create()
 
 你可以为你的命令添加一个别名：
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -48,9 +46,7 @@ const cli = Clerc.create()
 
 你可以添加更多的别名：
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -68,9 +64,7 @@ const cli = Clerc.create()
 
 你可以通过在命令名称中使用空格来定义子命令：
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -86,9 +80,7 @@ const cli = Clerc.create()
 
 你可以定义一个根命令（没有名称的命令）来处理没有指定子命令时的情况：
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -122,7 +114,6 @@ const cli = Clerc.create()
 
 ```ts
 // $ node ./foo-cli.mjs a b c d
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -136,9 +127,11 @@ const cli = Clerc.create()
 		],
 	})
 	.on("foo", (ctx) => {
-		ctx.parameters.requiredParameter; // => "a" (string)
-		ctx.parameters.optionalParameter; // => "b" (string | undefined)
-		ctx.parameters.optionalSpread; // => ["c", "d"] (string[])
+		ctx.parameters;
+		//  ^?
+		ctx.parameters.requiredParameter; // => "a"
+		ctx.parameters.optionalParameter; // => "b"
+		ctx.parameters.optionalSpread; // => ["c", "d"]
 	})
 	.parse();
 ```
@@ -161,7 +154,6 @@ $ npm run <script> -- <script arguments>
 
 ```ts
 // $ node ./foo-cli.mjs echo -- hello world
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -171,8 +163,10 @@ const cli = Clerc.create()
 		parameters: ["<script>", "--", "[arguments...]"],
 	})
 	.on("echo", (ctx) => {
-		ctx.parameters.script; // => "echo" (string)
-		ctx.parameters.arguments; // => ["hello", "world"] (string[])
+		ctx.parameters;
+		//  ^?
+		ctx.parameters.script; // => "echo"
+		ctx.parameters.arguments; // => ["hello", "world"]
 	})
 	.parse();
 ```
@@ -200,7 +194,6 @@ _Clerc_ 的选项解析由 [`@clerc/parser`](https://github.com/clercjs/clerc/bl
 
 ```ts
 // $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -227,7 +220,7 @@ const cli = Clerc.create()
 			},
 
 			object: {
-				type: object,
+				type: Object,
 				description: "一个对象选项。 (例如 --object.key value)",
 			},
 
@@ -238,11 +231,13 @@ const cli = Clerc.create()
 		},
 	})
 	.on("echo", (ctx) => {
-		ctx.flags.someBoolean; // => true (boolean | undefined)
-		ctx.flags.someString; // => "hello" (string)
-		ctx.flags.someNumber; // => [1, 2] (number[])
-		ctx.flags.object; // => { key: "value" } (Record<string, string | boolean>)
-		ctx.flags.counter; // => 2 (number)
+		ctx.flags;
+		//  ^?
+		ctx.flags.someBoolean; // => true
+		ctx.flags.someString; // => "hello"
+		ctx.flags.someNumber; // => [1, 2]
+		ctx.flags.object; // => { key: "value" }
+		ctx.flags.counter; // => 2
 	})
 	.parse();
 ```
@@ -289,7 +284,8 @@ const cli = Clerc.create()
 	})
 	.on("run", (ctx) => {
 		// 处理脚本运行
-		ctx.ignored; // => ["--flag"] (string[])
+		ctx.ignored; // => ["--flag"]
+		//	^?
 	})
 	.parse();
 ```

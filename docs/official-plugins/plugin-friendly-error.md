@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-friendly-error
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { friendlyErrorPlugin } from "@clerc/plugin-friendly-error";
+// or import directly from clerc
+import { friendlyErrorPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { friendlyErrorPlugin } from "@clerc/plugin-friendly-error"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

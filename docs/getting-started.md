@@ -39,8 +39,6 @@ $ pnpm add clerc
 Install clerc, and create a file named `cli.mjs`:
 
 ```ts
-import { Clerc } from "clerc";
-
 Clerc.create() // Create a new Clerc instance
 	.scriptName("foo") // CLI script name
 	.description("A foo CLI") // CLI description

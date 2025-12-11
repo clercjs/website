@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-not-found
 
 ## 🚀 使用方法
 
+### 导入
+
+```ts
+import { notFoundPlugin } from "@clerc/plugin-not-found";
+// 或者直接从 clerc 导入
+import { notFoundPlugin } from "clerc";
+```
+
 ### 基本用法
 
 ```ts
-import { notFoundPlugin } from "@clerc/plugin-not-found"; // 或者直接从 clerc 导入
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("我的 CLI 应用程序")

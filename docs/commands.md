@@ -26,9 +26,7 @@ This creates a CLI application named `foo-cli` with a command called `foo`. When
 
 You can add an alias for your command:
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
@@ -46,9 +44,7 @@ Now both `foo-cli foo` and `foo-cli bar` will output "It works!".
 
 You can add more aliases:
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
@@ -66,9 +62,7 @@ const cli = Clerc.create()
 
 You can define subcommands by using spaces in the command name:
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
@@ -84,9 +78,7 @@ const cli = Clerc.create()
 
 You can define a root command (a command with no name) to handle cases when no subcommand is specified:
 
-```js
-import { Clerc } from "clerc";
-
+```ts
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
@@ -120,7 +112,6 @@ Example:
 
 ```ts
 // $ node ./foo-cli.mjs a b c d
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -134,16 +125,18 @@ const cli = Clerc.create()
 		],
 	})
 	.on("foo", (ctx) => {
-		ctx.parameters.requiredParameter; // => "a" (string)
-		ctx.parameters.optionalParameter; // => "b" (string | undefined)
-		ctx.parameters.optionalSpread; // => ["c", "d"] (string[])
+		ctx.parameters;
+		//  ^?
+		ctx.parameters.requiredParameter; // => "a"
+		ctx.parameters.optionalParameter; // => "b"
+		ctx.parameters.optionalSpread; // => ["c", "d"]
 	})
 	.parse();
 ```
 
-### End Flag
+### End-of-file
 
-The end flag (`--`) (also known as _option terminator_) allows users to pass a portion of arguments. This is useful for arguments that should be parsed separately from other arguments or arguments that look like options.
+The end-of-file (`--`) (also known as _flag terminator_) allows users to pass a portion of arguments. This is useful for arguments that should be parsed separately from other arguments or arguments that look like flags.
 
 An example is [`npm run`](https://docs.npmjs.com/cli/v8/commands/npm-run-script):
 
@@ -153,13 +146,12 @@ $ npm run <script> -- <script arguments>
 
 The `--` indicates that all arguments after it should be passed to the _script_ rather than _npm_.
 
-You can specify `--` in the `parameters` array to parse option terminator arguments.
+You can specify `--` in the `parameters` array to parse flag terminator arguments.
 
 Example:
 
 ```ts
 // $ node ./foo-cli.mjs echo -- hello world
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -169,28 +161,30 @@ const cli = Clerc.create()
 		parameters: ["<script>", "--", "[arguments...]"],
 	})
 	.on("echo", (ctx) => {
-		ctx.parameters.script; // => "echo" (string)
-		ctx.parameters.arguments; // => ["hello", "world"] (string[])
+		ctx.parameters;
+		//  ^?
+		ctx.parameters.script; // => "echo"
+		ctx.parameters.arguments; // => ["hello", "world"]
 	})
 	.parse();
 ```
 
-## Options
+## Flags
 
-_Clerc_'s option parsing is powered by [`@clerc/parser`](https://github.com/clercjs/clerc/blob/main/packages/parser) and has many features:
+_Clerc_'s flag parsing is powered by [`@clerc/parser`](https://github.com/clercjs/clerc/blob/main/packages/parser) and has many features:
 
 - Array and custom types
-- Option delimiters: `--flag value`, `--flag=value`, `--flag:value` and `--flag.value`
+- Flag delimiters: `--flag value`, `--flag=value`, `--flag:value` and `--flag.value`
 - Combined aliases: `-abcd 2` → `-a -b -c -d 2`
-- [Option terminator](https://unix.stackexchange.com/a/11382): pass `--` to end option parsing
+- [End-of-file](https://unix.stackexchange.com/a/11382): pass `--` to end parsing
 
-Options can be specified in the `flags` object property, where the key is the option name and the value is either an option type function or an object describing the option.
+Flags can be specified in the `flags` object property, where the key is the flag name and the value is either an flag type function or an object describing the flag.
 
-It's recommended to use camelCase for option names as it will be interpreted as parsing the equivalent kebab-case option.
+It's recommended to use camelCase for flag names as it will be interpreted as parsing the equivalent kebab-case flag.
 
-The option type function can be any function that accepts a string and returns the parsed value. The default JavaScript constructors should cover most use cases: [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String), [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number), [Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean), etc.
+The flag type function can be any function that accepts a string and returns the parsed value. The default JavaScript constructors should cover most use cases: [String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String), [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number), [Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean), etc.
 
-The option description object can be used to store additional information about the option, such as `alias`, `default`, and `description`. To accept multiple values for an option, wrap the type function in an array.
+The flag description object can be used to store additional information about the flag, such as `alias`, `default`, and `description`. To accept multiple values for a flag, wrap the type function in an array.
 
 All provided information will be used to generate better help documentation.
 
@@ -198,7 +192,6 @@ Example:
 
 ```ts
 // $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
-import { Clerc } from "clerc";
 
 const cli = Clerc.create()
 	.scriptName("foo-cli")
@@ -208,12 +201,12 @@ const cli = Clerc.create()
 		flags: {
 			someBoolean: {
 				type: Boolean,
-				description: "Some boolean option",
+				description: "Some boolean flag",
 			},
 
 			someString: {
 				type: String,
-				description: "Some string option",
+				description: "Some string flag",
 				default: "n/a",
 			},
 
@@ -225,29 +218,31 @@ const cli = Clerc.create()
 			},
 
 			object: {
-				type: object,
-				description: "An object option. (e.g. --object.key value)",
+				type: Object,
+				description: "An object flag. (e.g. --object.key value)",
 			},
 
 			counter: {
 				type: [Boolean],
-				description: "A counter option. (e.g. -c -c -c)",
+				description: "A counter flag. (e.g. -c -c -c)",
 			},
 		},
 	})
 	.on("echo", (ctx) => {
-		ctx.flags.someBoolean; // => true (boolean | undefined)
-		ctx.flags.someString; // => "hello" (string)
-		ctx.flags.someNumber; // => [1, 2] (number[])
-		ctx.flags.object; // => { key: "value" } (Record<string, string | boolean>)
-		ctx.flags.counter; // => 2 (number)
+		ctx.flags;
+		//	^?
+		ctx.flags.someBoolean; // => true
+		ctx.flags.someString; // => "hello"
+		ctx.flags.someNumber; // => [1, 2]
+		ctx.flags.object; // => { key: "value" }
+		ctx.flags.counter; // => 2
 	})
 	.parse();
 ```
 
 ## Ignore
 
-Sometimes, you may want to ignore certain arguments or options in the command line input. For example, this usage of `deno`:
+Sometimes, you may want to ignore certain arguments or flags in the command line input. For example, this usage of `deno`:
 
 ```sh
 deno run --allow-read script.ts --flag
@@ -255,7 +250,7 @@ deno run --allow-read script.ts --flag
 
 Where `--flag` is passed directly to the script, not to `deno`.
 
-You can achieve this usage by using the `ignore` property to specify which arguments or options to ignore.
+You can achieve this usage by using the `ignore` property to specify which arguments or flags to ignore.
 
 ```ts
 import { Clerc, PARAMETER } from "clerc";
@@ -287,7 +282,8 @@ const cli = Clerc.create()
 	})
 	.on("run", (ctx) => {
 		// Handle script execution
-		ctx.ignored; // => ["--flag"] (string[])
+		ctx.ignored; // => ["--flag"]
+		//	^?
 	})
 	.parse();
 ```

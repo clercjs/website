@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-help
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { helpPlugin } from "@clerc/plugin-help";
+// or import directly from clerc
+import { helpPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { helpPlugin } from "@clerc/plugin-help"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")
@@ -106,9 +111,6 @@ const cli = Clerc.create()
 You can customize the behavior of the help plugin by passing options:
 
 ```ts
-import { helpPlugin } from "@clerc/plugin-help"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

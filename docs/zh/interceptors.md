@@ -11,8 +11,6 @@ title: 拦截器
 可以使用 `interceptor` 方法将拦截器添加到 CLI 中：
 
 ```ts
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -39,8 +37,6 @@ const cli = Clerc.create()
 `interceptor` 方法接受一个函数或一个对象：
 
 ```ts
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")
@@ -70,8 +66,6 @@ const cli = Clerc.create()
 通过在调用 `next()` 之后进行操作，您可以在调用命令处理程序之后执行一些操作：
 
 ```ts
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("一个简单的 CLI")

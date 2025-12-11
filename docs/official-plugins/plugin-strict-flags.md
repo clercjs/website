@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-strict-flags
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { strictFlagsPlugin } from "@clerc/plugin-strict-flags";
+// or import directly from clerc
+import { strictFlagsPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { strictFlagsPlugin } from "@clerc/plugin-strict-flags"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-version
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { versionPlugin } from "@clerc/plugin-version";
+// or import directly from clerc
+import { versionPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { versionPlugin } from "@clerc/plugin-version"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

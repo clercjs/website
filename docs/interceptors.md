@@ -39,8 +39,6 @@ Attention! When calling `next`, make sure to use `await`, otherwise errors might
 The `interceptor` method accepts either a function or an object:
 
 ```ts
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")
@@ -70,8 +68,6 @@ Therefore, the execution order is as follows:
 By performing operations after calling `next()`, you can execute some actions after the command handler is called:
 
 ```ts
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("foo-cli")
 	.description("A simple CLI")

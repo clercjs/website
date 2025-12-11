@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-completions
 
 ## 🚀 使用方法
 
+### 导入
+
+```ts
+import { completionsPlugin } from "@clerc/plugin-completions";
+// 或者直接从 clerc 导入
+import { completionsPlugin } from "clerc";
+```
+
 ### 基本用法
 
 ```ts
-import { completionsPlugin } from "@clerc/plugin-completions"; // 或者直接从 clerc 导入
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("我的 CLI 应用程序")

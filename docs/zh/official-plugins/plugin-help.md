@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-help
 
 ## 🚀 使用方法
 
+### 导入
+
+```ts
+import { helpPlugin } from "@clerc/plugin-help";
+// 或者直接从 clerc 导入
+import { helpPlugin } from "clerc";
+```
+
 ### 基本用法
 
 ```ts
-import { helpPlugin } from "@clerc/plugin-help"; // 或者直接从 clerc 导入
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("我的 CLI 应用程序")
@@ -103,9 +108,6 @@ const cli = Clerc.create()
 你可以通过传递选项来定制帮助插件的行为：
 
 ```ts
-import { helpPlugin } from "@clerc/plugin-help"; // 或者直接从 clerc 导入
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("我的 CLI 应用程序")

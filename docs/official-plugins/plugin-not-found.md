@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-not-found
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { notFoundPlugin } from "@clerc/plugin-not-found";
+// or import directly from clerc
+import { notFoundPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { notFoundPlugin } from "@clerc/plugin-not-found"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

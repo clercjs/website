@@ -26,12 +26,17 @@ $ pnpm add @clerc/plugin-completions
 
 ## 🚀 Usage
 
+### Import
+
+```ts
+import { completionsPlugin } from "@clerc/plugin-completions";
+// or import directly from clerc
+import { completionsPlugin } from "clerc";
+```
+
 ### Basic Usage
 
 ```ts
-import { completionsPlugin } from "@clerc/plugin-completions"; // or import directly from clerc
-import { Clerc } from "clerc";
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")
@@ -95,8 +100,6 @@ The plugin automatically generates complete auto-completion scripts for your CLI
 ### Advanced Configuration
 
 ```ts
-import { completionsPlugin } from "@clerc/plugin-completions"; // or import directly from clerc
-
 const cli = Clerc.create()
 	.scriptName("my-cli")
 	.description("My CLI application")

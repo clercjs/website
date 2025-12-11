@@ -39,8 +39,6 @@ $ pnpm add clerc
 安装 clerc，并创建一个名为 `cli.mjs` 的文件：
 
 ```ts
-import { Clerc } from "clerc";
-
 Clerc.create() // 创建一个新的 Clerc 实例
 	.scriptName("foo") // CLI 脚本名称
 	.description("一个 foo CLI") // CLI 描述
