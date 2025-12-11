@@ -18,7 +18,7 @@ function extractTitleFromMarkdown(content: string): string | null {
 	return titleMatch ? titleMatch[1].trim() : null;
 }
 
-export async function getPluginTitles(
+export async function getTitles(
 	path: string,
 ): Promise<{ filename: string; title: string }[]> {
 	try {
@@ -55,13 +55,13 @@ export async function getPluginTitles(
 	}
 }
 
-export async function getPluginNavigation(
+export async function getNavigation(
 	path: string,
 	webRoot: string,
 ): Promise<{ text: string; link: string }[]> {
-	const pluginTitles = await getPluginTitles(path);
+	const titles = await getTitles(path);
 
-	return pluginTitles.map(({ filename, title }) => {
+	return titles.map(({ filename, title }) => {
 		const link =
 			filename === "index.md"
 				? webRoot

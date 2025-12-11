@@ -2,9 +2,9 @@ import { join } from "node:path";
 
 import { defineConfig } from "vitepress";
 
-import { getPluginNavigation } from "./plugin-navigation";
+import { getNavigation } from "../utils/navigation";
 
-const pluginNavigation = await getPluginNavigation(
+const pluginNavigation = await getNavigation(
 	join(import.meta.dirname, "..", "..", "zh", "official-plugins"),
 	"/zh/official-plugins",
 );
@@ -41,16 +41,28 @@ export const zhConfig = defineConfig({
 						link: "/zh/commands",
 					},
 					{
-						text: "拦截器",
-						link: "/zh/interceptors",
-					},
-					{
 						text: "上下文",
 						link: "/zh/context",
 					},
 					{
+						text: "全局选项",
+						link: "/zh/global-flags",
+					},
+					{
+						text: "拦截器",
+						link: "/zh/interceptors",
+					},
+					{
 						text: "插件",
 						link: "/zh/plugins",
+					},
+					{
+						text: "错误处理",
+						link: "/zh/error-handling",
+					},
+					{
+						text: "进阶用法",
+						link: "/zh/advanced",
 					},
 				],
 			},

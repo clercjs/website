@@ -2,9 +2,9 @@ import { join } from "node:path";
 
 import { defineConfig } from "vitepress";
 
-import { getPluginNavigation } from "./plugin-navigation";
+import { getNavigation } from "../utils/navigation";
 
-const pluginNavigation = await getPluginNavigation(
+const pluginNavigation = await getNavigation(
 	join(import.meta.dirname, "..", "..", "official-plugins"),
 	"/official-plugins",
 );
@@ -41,16 +41,28 @@ export const enConfig = defineConfig({
 						link: "/commands",
 					},
 					{
-						text: "Interceptors",
-						link: "/interceptors",
-					},
-					{
 						text: "Context",
 						link: "/context",
 					},
 					{
+						text: "Global Flags",
+						link: "/global-flags",
+					},
+					{
+						text: "Interceptors",
+						link: "/interceptors",
+					},
+					{
 						text: "Plugins",
 						link: "/plugins",
+					},
+					{
+						text: "Error Handling",
+						link: "/error-handling",
+					},
+					{
+						text: "Advanced Usage",
+						link: "/advanced",
 					},
 				],
 			},
