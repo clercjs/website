@@ -22,3 +22,4 @@ Clerc.create()
 		throw new Error("Testing error handling");
 	})
 	.parse();
+```

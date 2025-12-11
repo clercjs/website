@@ -24,3 +24,4 @@ Clerc.create()
 		console.log("Running the application...");
 	})
 	.parse();
+```

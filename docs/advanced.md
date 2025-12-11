@@ -34,3 +34,4 @@ When you need to run, you can call:
 
 ```ts
 result.run(); // Execute the parsed command
+```
