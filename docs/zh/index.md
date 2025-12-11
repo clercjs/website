@@ -13,8 +13,8 @@ hero:
       text: 快速开始
       link: /zh/getting-started
     - theme: alt
-      text: API 参考（暂不可用）
-      link: /zh/
+      text: 在 GitHub 上查看
+      link: https://github.com/clercjs/clerc
 
 features:
   - title: 插件系统

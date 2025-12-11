@@ -13,8 +13,8 @@ hero:
       text: Getting Started
       link: /getting-started
     - theme: alt
-      text: API Reference (Not available yet)
-      link: /
+      text: View on GitHub
+      link: https://github.com/clercjs/clerc
 
 features:
   - title: Plugin System
