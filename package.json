@@ -20,6 +20,7 @@
 		"prettier": "^3.7.4",
 		"typescript": "^5.9.3",
 		"unocss": "^66.5.10",
-		"vitepress": "2.0.0-alpha.15"
+		"vitepress": "2.0.0-alpha.15",
+		"vitepress-plugin-group-icons": "^1.6.5"
 	}
 }

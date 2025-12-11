@@ -1,5 +1,9 @@
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vitepress";
+import {
+	groupIconMdPlugin,
+	groupIconVitePlugin,
+} from "vitepress-plugin-group-icons";
 
 export const sharedConfig = defineConfig({
 	title: "Clerc",
@@ -22,7 +26,12 @@ export const sharedConfig = defineConfig({
 			provider: "local",
 		},
 	},
+	markdown: {
+		config(md) {
+			md.use(groupIconMdPlugin);
+		},
+	},
 	vite: {
-		plugins: [UnoCSS()],
+		plugins: [groupIconVitePlugin(), UnoCSS()],
 	},
 });
