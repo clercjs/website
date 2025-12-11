@@ -24,8 +24,8 @@ importers:
         specifier: 7.0.0-dev.20251210.1
         version: 7.0.0-dev.20251210.1
       clerc:
-        specifier: 1.0.0-beta.3
-        version: 1.0.0-beta.3
+        specifier: 1.0.0-beta.4
+        version: 1.0.0-beta.4
       eslint:
         specifier: ^9.39.1
         version: 9.39.1(jiti@2.6.1)
@@ -95,44 +95,44 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@clerc/core@1.0.0-beta.3':
-    resolution: {integrity: sha512-z4mI/Lf0UaIu9pg+KLAbWhJgbF3maeOpsJ/+ChnN4iolVn8xBBtdcZqt2DArYgWdApAbNglnjO3PBfPhIDJmoQ==}
+  '@clerc/core@1.0.0-beta.4':
+    resolution: {integrity: sha512-Hxe/KPAdvim+cO8RylBZwky7o3k7o+hGICXpHVN6UmYA9VMYyCYUtAS9nKMMh7wJcJDAx7cXmupovUKYuAFvQg==}
 
-  '@clerc/parser@1.0.0-beta.3':
-    resolution: {integrity: sha512-4UQP6JcvMHelyJtxhlAD+tnvRwQIPO0sEcoWs/JgwxAZbwA1sLucqzEvL59nHLbdu7zPzc6ASP2s8XOwLBpnSw==}
+  '@clerc/parser@1.0.0-beta.4':
+    resolution: {integrity: sha512-WodvoDwRGn1EcmlsAFcORRdUHA/7i3vvSMfvpVIGTO/ecBZND29Nk14Hm+6lCy2J6FqmbWb9PSsuEx4nDKwCCg==}
 
-  '@clerc/plugin-completions@1.0.0-beta.3':
-    resolution: {integrity: sha512-W04ccRm415AgaiAN4dMwNWeyyKspuH1hLss15cwDyZzZeckYfmbBWUXriMwjgwiFWKWLB9Ct0o4coiTUNgTHlA==}
+  '@clerc/plugin-completions@1.0.0-beta.4':
+    resolution: {integrity: sha512-mBebVZqaQJyR63TzjUGnEbPB/YWyLBiUAzpncz07SrnTNkwnHxZ0ORMzkpS3fmW9FSZp1uvorTVHnhqmBlINnw==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/plugin-friendly-error@1.0.0-beta.3':
-    resolution: {integrity: sha512-jy20miIqc9sqRzhnQ4pXhLT+zsnZfhL08kVvU/yIUCYiVWYoP7m+ySpWGM9FH6n700x83UN3uLm3NN1tXFVIQw==}
+  '@clerc/plugin-friendly-error@1.0.0-beta.4':
+    resolution: {integrity: sha512-t/16xhqxK6oObx9L8uiCcyQgZ5JLBdRwsQrf9Mv+NvgQ3fdJB808uz737NfZx9USIXGwm72TQ7L8/KpqzvMvLA==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/plugin-help@1.0.0-beta.3':
-    resolution: {integrity: sha512-zZnKOVK6Ynkz79ywGZCsWVrGRaFl3unDnZtM0t8Xs1Q5/63B3Vcj2B6qIcz2DE2K2l5MyrXStLWdUOVeCfKqaQ==}
+  '@clerc/plugin-help@1.0.0-beta.4':
+    resolution: {integrity: sha512-y3hb6xmA/2wNpbiGNcKY+GNPrpSPIG7EiGDLRFBTilMUkoUiQzy8BUnvQrNqWQGKx2xaXDPO8jM22LlRLrBMDA==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/plugin-not-found@1.0.0-beta.3':
-    resolution: {integrity: sha512-2Od301WP1XRFKRvGHP2IQS5c623QrTm5vnZnxXsxgLH6l/SZMC7jrSFwvh+aSmDjEXPnxTbh9hxMltCLjmumpg==}
+  '@clerc/plugin-not-found@1.0.0-beta.4':
+    resolution: {integrity: sha512-6HmTiw/yuKO/uhflc3eEQkLh8OtWiv2VZyOvH7+DnGU6AmKJuZVdcsI1vSWZcU7cCIs5i+fb5aaibyVFpWCJKw==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/plugin-strict-flags@1.0.0-beta.3':
-    resolution: {integrity: sha512-zWYhLRaD+CJu0EH73aGnuoh8iJfgsVRcapwE/SNRPq8PREUk5qeVMRTSzFAl5t6d33VDT2JA3YwmMyzFtNTSTg==}
+  '@clerc/plugin-strict-flags@1.0.0-beta.4':
+    resolution: {integrity: sha512-1gTLDbd5uTWDfwpxXMKkAY0yoPVxnzbxaIalSEwa2RHbVUSWOp5vRTaLZmsSyhHaRH4BIdNzjivreIHdg7XrDg==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/plugin-version@1.0.0-beta.3':
-    resolution: {integrity: sha512-//Cw8SfZKX8nGZuSBB5lE4Q2prot4+XxuPSCqLRW2Zr3KexNJBwiD6ZD2IEq1lyDDURP8BwzlVESYH0JIKixlA==}
+  '@clerc/plugin-version@1.0.0-beta.4':
+    resolution: {integrity: sha512-cP0tHRoESaxs/65ojtnBvzPVHcVKFe4SZrXGCPlaZoc+VilbXIh2iXKignxUkqyVHg5SSKHyOdHiP0cCUjTm1Q==}
     peerDependencies:
       '@clerc/core': '*'
 
-  '@clerc/utils@1.0.0-beta.3':
-    resolution: {integrity: sha512-vIqhofoPcdYaCPaFDH2zrdR6kgG5nCCXVV18mW3w8VtVERR0uGxynQqTREKZPMnxfzcDQFa7epmJ4+QI4iSaJQ==}
+  '@clerc/utils@1.0.0-beta.4':
+    resolution: {integrity: sha512-w4Z1bETy5xBKlcNHSvCZc/ti5UuOxL7KZNK5HMEVHu2PFsDgUmqDSXlbquZbufQQ33qy/qa2eX3nVjByaFpMeQ==}
     peerDependencies:
       '@clerc/core': '*'
 
@@ -1337,8 +1337,8 @@ packages:
     resolution: {integrity: sha512-GfisEZEJvzKrmGWkvfhgzcz/BllN1USeqD2V6tg14OAOgaCD2Z/PUEuxnAZ/nPvmaHRG7a8y77p1T/IRQ4D1Hw==}
     engines: {node: '>=4'}
 
-  clerc@1.0.0-beta.3:
-    resolution: {integrity: sha512-X3QXjR3kKJPhqOtyBt8dJRHIHWwvP8i+npY1+9hRQSlTYL42uuoGFV4Vcty8HwRP2oHFZDDog8mjEKpQig7Rfw==}
+  clerc@1.0.0-beta.4:
+    resolution: {integrity: sha512-Ip8slo4kA4HLRogaXvGxP5/YkCk8hNMzOxZ11kj9wcV6eIuB1oGLmHs8Hp5JMxZPRyexcikyrLHj+dRxQ3eJdg==}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -3325,56 +3325,56 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@clerc/core@1.0.0-beta.3':
+  '@clerc/core@1.0.0-beta.4':
     dependencies:
-      '@clerc/parser': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/parser': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
       lite-emit: 3.1.0
 
-  '@clerc/parser@1.0.0-beta.3': {}
+  '@clerc/parser@1.0.0-beta.4': {}
 
-  '@clerc/plugin-completions@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-completions@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
       '@pnpm/tabtab': 0.5.4
     transitivePeerDependencies:
       - supports-color
 
-  '@clerc/plugin-friendly-error@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-friendly-error@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
+      '@clerc/core': 1.0.0-beta.4
       kons: 0.7.1
 
-  '@clerc/plugin-help@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-help@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
       '@types/text-table': 0.2.5
       string-width: 8.1.0
       text-table: 0.2.0
       yoctocolors: 2.1.2
 
-  '@clerc/plugin-not-found@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-not-found@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
       didyoumean2: 7.0.4
       yoctocolors: 2.1.2
 
-  '@clerc/plugin-strict-flags@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-strict-flags@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
 
-  '@clerc/plugin-version@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/plugin-version@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/utils': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/utils': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
 
-  '@clerc/utils@1.0.0-beta.3(@clerc/core@1.0.0-beta.3)':
+  '@clerc/utils@1.0.0-beta.4(@clerc/core@1.0.0-beta.4)':
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
+      '@clerc/core': 1.0.0-beta.4
 
   '@docsearch/css@4.3.2': {}
 
@@ -4702,15 +4702,15 @@ snapshots:
     dependencies:
       escape-string-regexp: 1.0.5
 
-  clerc@1.0.0-beta.3:
+  clerc@1.0.0-beta.4:
     dependencies:
-      '@clerc/core': 1.0.0-beta.3
-      '@clerc/plugin-completions': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
-      '@clerc/plugin-friendly-error': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
-      '@clerc/plugin-help': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
-      '@clerc/plugin-not-found': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
-      '@clerc/plugin-strict-flags': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
-      '@clerc/plugin-version': 1.0.0-beta.3(@clerc/core@1.0.0-beta.3)
+      '@clerc/core': 1.0.0-beta.4
+      '@clerc/plugin-completions': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
+      '@clerc/plugin-friendly-error': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
+      '@clerc/plugin-help': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
+      '@clerc/plugin-not-found': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
+      '@clerc/plugin-strict-flags': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
+      '@clerc/plugin-version': 1.0.0-beta.4(@clerc/core@1.0.0-beta.4)
     transitivePeerDependencies:
       - supports-color
 

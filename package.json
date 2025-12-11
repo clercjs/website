@@ -17,7 +17,7 @@
 		"@so1ve/prettier-config": "^3.19.0",
 		"@types/node": "^24.10.2",
 		"@typescript/native-preview": "7.0.0-dev.20251210.1",
-		"clerc": "1.0.0-beta.3",
+		"clerc": "1.0.0-beta.4",
 		"eslint": "^9.39.1",
 		"prettier": "^3.7.4",
 		"typescript": "^5.9.3",
