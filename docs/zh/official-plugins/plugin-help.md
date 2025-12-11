@@ -6,7 +6,15 @@ title: 帮助信息插件
 
 为您的 CLI 添加帮助信息的插件。
 
-## 📦 安装
+:::tip
+
+该插件已内置于 `clerc` 包中导出的 `Clerc` 类中，您无需单独安装即可使用。
+
+:::
+
+## 独立使用
+
+### 📦 安装
 
 :::code-group
 
@@ -24,9 +32,9 @@ $ pnpm add @clerc/plugin-help
 
 :::
 
-## 🚀 使用方法
+### 🚀 使用方法
 
-### 导入
+#### 导入
 
 ```ts
 import { helpPlugin } from "@clerc/plugin-help";
@@ -34,7 +42,7 @@ import { helpPlugin } from "@clerc/plugin-help";
 import { helpPlugin } from "clerc";
 ```
 
-### 基本用法
+#### 基本用法
 
 ```ts
 const cli = Clerc.create()
@@ -49,7 +57,7 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-### 运行效果
+## 运行效果
 
 ```bash
 # 显示主帮助，在有根命令的时候显示根命令的帮助信息，没有的时候显示 CLI 自己的帮助信息
@@ -75,9 +83,9 @@ $ node my-cli help hello
 - 全局选项
 - 自定义的提示信息和示例
 
-### 高级用法
+## 高级用法
 
-#### 自定义命令帮助信息
+### 自定义命令帮助信息
 
 你可以设置 `help` 选项来自定义每个命令的帮助信息：
 
@@ -103,7 +111,7 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-#### 插件选项
+### 插件选项
 
 你可以通过传递选项来定制帮助插件的行为：
 

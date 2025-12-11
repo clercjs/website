@@ -6,7 +6,15 @@ title: Version Plugin
 
 A plugin that adds a version command to your CLI.
 
-## 📦 Installation
+:::tip
+
+This plugin is built into the `Clerc` class exported by the `clerc` package, so you don't need to install it separately to use it.
+
+:::
+
+## Standalone Usage
+
+### 📦 Installation
 
 :::code-group
 
@@ -24,9 +32,9 @@ $ pnpm add @clerc/plugin-version
 
 :::
 
-## 🚀 Usage
+### 🚀 Usage
 
-### Import
+#### Import
 
 ```ts
 import { versionPlugin } from "@clerc/plugin-version";
@@ -45,7 +53,7 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-### Running Effect
+## Running Effect
 
 ```bash
 # Display version information

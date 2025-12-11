@@ -14,7 +14,9 @@ Clerc 仅支持 ESM！
 
 :::info
 
-`clerc` 包重新导出了 `@clerc/core` 和所有插件，因此可能会增加您的捆绑包大小，不过如果你的打包器支持摇树优化（tree-shaking），则不会有太大影响。如需减小大小，请按需安装 `@clerc/core` 和插件。
+`clerc` 包重新导出了一个经过拓展的 `Clerc` 类，它内置了 `@clerc/plugin-help` 和 `@clerc/plugin-version` 插件。如果您只需要核心功能，可以安装 `@clerc/core` 包，或者使用导出的 `BaseClerc` 类。
+
+同时，`clerc` 包的体积可能会较大，因为它重新导出了所有官方插件。但如果您的打包工具支持 tree-shaking，则影响不大。若想减小体积，请按需安装 `@clerc/core` 和所需插件。
 
 :::
 

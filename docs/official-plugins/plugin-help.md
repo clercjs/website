@@ -6,7 +6,15 @@ title: Help Plugin
 
 A plugin that adds help information to your CLI.
 
-## 📦 Installation
+:::tip
+
+This plugin is built into the `Clerc` class exported by the `clerc` package, so you don't need to install it separately to use it.
+
+:::
+
+## Standalone Usage
+
+### 📦 Installation
 
 :::code-group
 
@@ -24,9 +32,9 @@ $ pnpm add @clerc/plugin-help
 
 :::
 
-## 🚀 Usage
+### 🚀 Usage
 
-### Import
+#### Import
 
 ```ts
 import { helpPlugin } from "@clerc/plugin-help";
@@ -34,7 +42,7 @@ import { helpPlugin } from "@clerc/plugin-help";
 import { helpPlugin } from "clerc";
 ```
 
-### Basic Usage
+#### Basic Usage
 
 ```ts
 const cli = Clerc.create()
@@ -49,7 +57,7 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-### Running Effect
+## Running Effect
 
 ```bash
 # Show main help, displays root command help when there is a root command, otherwise shows CLI's own help
@@ -75,9 +83,9 @@ The plugin automatically generates beautiful help information for your CLI, incl
 - Global options
 - Custom notes and examples
 
-### Advanced Usage
+## Advanced Usage
 
-#### Custom Command Help
+### Custom Command Help
 
 You can set the `help` option to customize the help information for each command:
 
@@ -106,7 +114,7 @@ const cli = Clerc.create()
 	.parse();
 ```
 
-#### Plugin Options
+### Plugin Options
 
 You can customize the behavior of the help plugin by passing options:
 
