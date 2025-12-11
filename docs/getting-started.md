@@ -40,6 +40,7 @@ Install clerc, and create a file named `cli.mjs`:
 
 ```ts
 Clerc.create() // Create a new Clerc instance
+	.name("foo") // Optional, CLI name, used to generate help text
 	.scriptName("foo") // CLI script name
 	.description("A foo CLI") // CLI description
 	.version("0.0.0") // CLI version

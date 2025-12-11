@@ -40,6 +40,7 @@ $ pnpm add clerc
 
 ```ts
 Clerc.create() // 创建一个新的 Clerc 实例
+	.name("foo") // 可选，CLI 名称，用于生成帮助文本
 	.scriptName("foo") // CLI 脚本名称
 	.description("一个 foo CLI") // CLI 描述
 	.version("0.0.0") // CLI 版本
