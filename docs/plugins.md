@@ -49,6 +49,24 @@ export const myPlugin = definePlugin({
 });
 ```
 
+## Extending Custom Option Types
+
+If your plugin needs to add custom types for commands or options, you can use the following method:
+
+```ts
+declare module "@clerc/core" {
+	// For adding custom types to commands
+	export interface CommandCustomOptions {
+		foo: string;
+	}
+
+	// For adding custom types to options
+	export interface FlagCustomOptions {
+		foo: string;
+	}
+}
+```
+
 ## Publishing Plugins
 
 While not mandatory, it is recommended that you follow the following conventions when publishing plugins to make it easier for users to identify and use your plugins:

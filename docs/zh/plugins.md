@@ -49,6 +49,24 @@ export const myPlugin = definePlugin({
 });
 ```
 
+## 拓展选项类型
+
+如果你的插件需要为命令或选项添加自定义类型，可以使用如下方法：
+
+```ts
+declare module "@clerc/core" {
+	// 为命令添加自定义类型
+	export interface CommandCustomOptions {
+		foo: string;
+	}
+
+	// 为选项添加自定义类型
+	export interface FlagCustomOptions {
+		foo: string;
+	}
+}
+```
+
 ## 发布插件
 
 虽然不是必须的，但是建议你在发布插件时，使用如下的规范，以便用户更容易地识别和使用你的插件：
