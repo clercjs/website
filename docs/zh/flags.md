@@ -80,6 +80,225 @@ const cli = Clerc.create()
 	.parse();
 ```
 
+## 选项类型详解
+
+### String 类型
+
+`String` 类型用于接受字符串值的选项。这是最基础的选项类型。
+
+**默认值行为：** 如果未指定该选项，其值为 `undefined`（除非设置了 `default` 属性）。
+
+```ts
+const cli = Clerc.create()
+	.command("greet", "问候", {
+		flags: {
+			name: {
+				type: String,
+				description: "用户名",
+				default: "世界",
+			},
+
+			message: {
+				type: String,
+				alias: "m",
+				description: "问候信息",
+			},
+		},
+	})
+	.on("greet", (ctx) => {
+		console.log(`${ctx.flags.message}, ${ctx.flags.name}!`);
+		// $ node cli.mjs greet --name 张三 --message 你好
+		// 你好, 张三!
+		// $ node cli.mjs greet --message 你好
+		// ctx.flags.message => "你好"
+		// ctx.flags.name => "世界" (使用默认值)
+	})
+	.parse();
+```
+
+### Boolean 类型
+
+`Boolean` 类型用于创建布尔开关选项。默认情况下，只需提及选项名称即可将其设置为 `true`。
+
+**默认值行为：** 如果未指定该选项，其值为 `false`。
+
+```ts
+const cli = Clerc.create()
+	.command("build", "构建项目", {
+		flags: {
+			production: {
+				type: Boolean,
+				description: "构建生产版本",
+			},
+
+			watch: {
+				type: Boolean,
+				alias: "w",
+				description: "启用监视模式",
+			},
+		},
+	})
+	.on("build", (ctx) => {
+		// $ node cli.mjs build --production --watch
+		ctx.flags.production; // => true
+		ctx.flags.watch; // => true
+
+		// $ node cli.mjs build
+		ctx.flags.production; // => false
+		ctx.flags.watch; // => false
+	})
+	.parse();
+```
+
+#### Boolean 的 Negatable 属性
+
+Boolean 类型支持 `negatable` 属性，允许你决定是否启用否定选项。默认情况下，`negatable` 为 `true`，这意味着默认情况下 `--no-flag` 会将 `flag` 选项设置为 `false`。
+
+```ts
+const cli = Clerc.create()
+	.command("start", "启动应用", {
+		flags: {
+			color: {
+				type: Boolean,
+				negatable: true, // 默认
+				description: "启用彩色输出",
+				default: true,
+			},
+
+			cache: {
+				type: Boolean,
+				negatable: false, // 禁用否定形式
+				description: "启用缓存",
+				default: true,
+			},
+		},
+	})
+	.on("start", (ctx) => {
+		// $ node cli.mjs start
+		ctx.flags.color; // => true
+		ctx.flags.cache; // => true
+
+		// $ node cli.mjs start --no-color --no-cache
+		ctx.flags.color; // => false
+		ctx.flags.cache; // => true
+
+		// 必须使用 --cache=false 来禁用缓存
+		// $ node cli.mjs start --cache=false
+		ctx.flags.cache; // => false
+	})
+	.parse();
+```
+
+### Array 类型
+
+`Array` 类型用于接受多个值的选项。通过将类型函数包装在数组中来定义：
+
+**默认值行为：** 如果未指定该选项，其值为 `[]`（空数组）。
+
+```ts
+const cli = Clerc.create()
+	.command("copy", "复制文件", {
+		flags: {
+			// 使用 [String] 来接受多个字符串值
+			include: {
+				type: [String],
+				alias: "i",
+				description: "包含的文件模式",
+			},
+
+			// 使用 [Number] 来接受多个数字值
+			ports: {
+				type: [Number],
+				alias: "p",
+				description: "要监听的端口",
+			},
+		},
+	})
+	.on("copy", (ctx) => {
+		// $ node cli.mjs copy -i "*.js" -i "*.ts" -p 3000 -p 3001
+		ctx.flags.include; // => ["*.js", "*.ts"]
+		ctx.flags.ports; // => [3000, 3001]
+
+		// $ node cli.mjs copy
+		ctx.flags.include; // => []
+		ctx.flags.ports; // => []
+	})
+	.parse();
+```
+
+:::tip
+
+如果你希望传入类似 `K=V` 这样的键值对，可以选择在命令行中使用冒号分隔符：
+
+```bash
+$ node cli.mjs config --define:env=production --define:version=1.0.0
+```
+
+实际上 `--define=env=production` 也可以正常工作，只是看起来不太直观。
+
+:::
+
+### 计数器类型
+
+计数器类型用于计算选项被指定的次数。通过使用 `[Boolean]` 类型可以实现计数器功能：
+
+**默认值行为：** 如果未指定该选项，其值为 `0`。
+
+```ts
+const cli = Clerc.create()
+	.command("log", "显示日志", {
+		flags: {
+			// [Boolean] 类型会计数选项被使用的次数
+			verbose: {
+				type: [Boolean],
+				alias: "v",
+				description: "详细日志级别（-v, -vv, -vvv）",
+			},
+		},
+	})
+	.on("log", (ctx) => {
+		// $ node cli.mjs log -v
+		ctx.flags.verbose; // => 1
+
+		// $ node cli.mjs log -vvv
+		ctx.flags.verbose; // => 3
+
+		// $ node cli.mjs log -v -v -v
+		ctx.flags.verbose; // => 3
+
+		// $ node cli.mjs log
+		ctx.flags.verbose; // => 0
+	})
+	.parse();
+```
+
+### Object 类型
+
+`Object` 类型用于接受键值对形式的选项。使用点号或其他分隔符来指定对象的属性：
+
+**默认值行为：** 如果未指定该选项，其值为 `{}`（空对象）。
+
+```ts
+const cli = Clerc.create()
+	.command("config", "配置应用", {
+		flags: {
+			define: {
+				type: Object,
+				alias: "d",
+				description: "定义环境变量",
+			},
+		},
+	})
+	.on("config", (ctx) => {
+		// $ node cli.mjs config --define.apiUrl http://api.example.com --define.debug
+		ctx.flags.define; // => { apiUrl: "http://api.example.com", debug: true }
+
+		// $ node cli.mjs config
+		ctx.flags.define; // => {}
+	})
+	.parse();
+```
+
 ## 内置的高级类型
 
 Clerc 提供了一些内置的高级选项类型，方便处理常见的需求：
