@@ -52,7 +52,6 @@ const cli = Clerc.create()
 		// $ node cli.mjs build --output dist
 		// $ node cli.mjs build -o dist
 		// Both work the same way
-
 		// $ node cli.mjs build --verbose
 		// $ node cli.mjs build -v
 		// Both enable verbose output
@@ -86,7 +85,6 @@ const cli = Clerc.create()
 		// $ node cli.mjs config --config file.json
 		// $ node cli.mjs config -c file.json
 		// $ node cli.mjs config -cfg file.json
-
 		// $ node cli.mjs config --format json
 		// $ node cli.mjs config -f json
 		// $ node cli.mjs config -fmt json

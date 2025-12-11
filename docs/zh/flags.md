@@ -52,7 +52,6 @@ const cli = Clerc.create()
 		// $ node cli.mjs build --output dist
 		// $ node cli.mjs build -o dist
 		// 两者的工作方式相同
-
 		// $ node cli.mjs build --verbose
 		// $ node cli.mjs build -v
 		// 两者都启用详细输出
@@ -86,7 +85,6 @@ const cli = Clerc.create()
 		// $ node cli.mjs config --config file.json
 		// $ node cli.mjs config -c file.json
 		// $ node cli.mjs config -cfg file.json
-
 		// $ node cli.mjs config --format json
 		// $ node cli.mjs config -f json
 		// $ node cli.mjs config -fmt json
