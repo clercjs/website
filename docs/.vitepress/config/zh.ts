@@ -45,6 +45,10 @@ export const zhConfig = defineConfig({
 						link: "/zh/context",
 					},
 					{
+						text: "选项",
+						link: "/zh/flags",
+					},
+					{
 						text: "全局选项",
 						link: "/zh/global-flags",
 					},

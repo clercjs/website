@@ -45,6 +45,10 @@ export const enConfig = defineConfig({
 						link: "/context",
 					},
 					{
+						text: "Flags",
+						link: "/flags",
+					},
+					{
 						text: "Global Flags",
 						link: "/global-flags",
 					},

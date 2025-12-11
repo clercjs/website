@@ -6,6 +6,8 @@ title: Global Flags
 
 Clerc supports registering one or more global flags that can be used across all commands.
 
+More details about flags can be found in the [Flags Documentation](./flags).
+
 ## Example
 
 ```ts
@@ -24,3 +26,4 @@ Clerc.create()
 		console.log("Running the application...");
 	})
 	.parse();
+```

@@ -173,74 +173,7 @@ const cli = Clerc.create()
 
 ## 选项
 
-_Clerc_ 的选项解析由 [`@clerc/parser`](https://github.com/clercjs/clerc/blob/main/packages/parser) 提供支持，并具有许多功能：
-
-- 数组和自定义类型
-- 选项分隔符：`--flag value`、`--flag=value`、`--flag:value` 和 `--flag.value`
-- 组合别名：`-abcd 2` → `-a -b -c -d 2`
-- [选项结束符](https://unix.stackexchange.com/a/11382)：传递 `--` 来结束选项解析
-
-可以在 `flags` 对象属性中指定选项，其中键是选项名称，值是选项类型函数或描述选项的对象。
-
-建议使用驼峰命名法作为选项名称，因为它将被解释为解析短横线分隔的等效选项。
-
-选项类型函数可以是任何接受字符串并返回解析后的值的函数。默认的 JavaScript 构造函数应该涵盖大多数用例：[String](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/String)、[Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number)、[Boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean/Boolean) 等。
-
-选项描述对象可用于存储有关选项的其他信息，例如 `alias`、`default` 和 `description`。要接受选项的多个值，请将类型函数包装在数组中。
-
-所有提供的信息将用于生成更好的帮助文档。
-
-示例：
-
-```ts
-// $ node ./foo-cli.mjs echo --some-boolean --some-string hello --some-number 1 -n 2
-
-const cli = Clerc.create()
-	.scriptName("foo-cli")
-	.description("一个简单的 CLI")
-	.version("1.0.0")
-	.command("echo", "回显", {
-		flags: {
-			someBoolean: {
-				type: Boolean,
-				description: "一些布尔选项",
-			},
-
-			someString: {
-				type: String,
-				description: "一些字符串选项",
-				default: "n/a",
-			},
-
-			someNumber: {
-				// 将类型函数包装在数组中以允许多个值
-				type: [Number],
-				alias: "n",
-				description: "数字数组。 (例如 -n 1 -n 2 -n 3)",
-			},
-
-			object: {
-				type: Object,
-				description: "一个对象选项。 (例如 --object.key value)",
-			},
-
-			counter: {
-				type: [Boolean],
-				description: "一个计数器选项。 (例如 -c -c -c)",
-			},
-		},
-	})
-	.on("echo", (ctx) => {
-		ctx.flags;
-		//  ^?
-		ctx.flags.someBoolean; // => true
-		ctx.flags.someString; // => "hello"
-		ctx.flags.someNumber; // => [1, 2]
-		ctx.flags.object; // => { key: "value" }
-		ctx.flags.counter; // => 2
-	})
-	.parse();
-```
+请参见[选项文档](./flags)。
 
 ## 忽略
 
