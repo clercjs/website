@@ -14,5 +14,9 @@
 		"skipDefaultLibCheck": true,
 		"skipLibCheck": true
 	},
-	"include": ["uno.config.ts", "docs/.vitepress/**/*.ts"]
+	"include": [
+		"uno.config.ts",
+		"docs/.vitepress/**/*.ts",
+		"docs/.vitepress/**/*.vue"
+	]
 }
